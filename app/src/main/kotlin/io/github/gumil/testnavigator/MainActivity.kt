@@ -1,0 +1,28 @@
+package io.github.gumil.testnavigator
+
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.view.ViewGroup
+import com.zhuinden.navigator.Navigator
+import com.zhuinden.simplestack.HistoryBuilder
+import io.github.gumil.testnavigator.home.HomeKey
+import io.github.gumil.testnavigator.common.ViewStateChanger
+
+internal class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val root = findViewById(R.id.root) as ViewGroup
+
+        Navigator.configure()
+                .setStateChanger(ViewStateChanger(this, root))
+                .install(this, root, HistoryBuilder.single(HomeKey()))
+    }
+
+    override fun onBackPressed() {
+        if(!Navigator.onBackPressed(this)) {
+            super.onBackPressed()
+        }
+    }
+}
