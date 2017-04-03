@@ -9,6 +9,7 @@ import com.zhuinden.navigator.Navigator
 import com.zhuinden.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.home.HomeDemoModel
 import io.github.gumil.testnavigator.home.HomeKey
 import io.github.gumil.testnavigator.utils.applyButtonBarStyle
 import io.github.gumil.testnavigator.utils.getMaterialColor
@@ -24,7 +25,7 @@ internal class NavigationLayout(
     private lateinit var upButton: Button
 
     override fun createView(context: Context) = with(context) {
-        toolbarTitle = "Navigation Demos"
+        toolbarTitle = HomeDemoModel.NAVIGATION.title
         verticalLayout {
             backgroundColor = getMaterialColor(index)
 

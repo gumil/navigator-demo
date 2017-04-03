@@ -9,6 +9,7 @@ import com.zhuinden.navigator.Navigator
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.navigation.NavigationKey
+import io.github.gumil.testnavigator.transition.TransitionKey
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.recyclerview.v7.recyclerView
@@ -52,7 +53,7 @@ internal class HomeLayout : ViewLayout() {
                         Navigator.getBackstack(view.context).goTo(NavigationKey())
                     }
                     HomeDemoModel.TRANSITIONS -> {
-
+                        Navigator.getBackstack(view.context).goTo(TransitionKey())
                     }
                     HomeDemoModel.SHARED_ELEMENT_TRANSITIONS -> {
 

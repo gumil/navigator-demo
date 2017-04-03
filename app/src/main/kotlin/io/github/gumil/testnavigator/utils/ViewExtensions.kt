@@ -5,6 +5,10 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.support.annotation.ColorRes
+import android.support.v4.content.ContextCompat
+import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.Button
 import io.github.gumil.testnavigator.R
 
@@ -38,4 +42,32 @@ internal fun Context.findActivity(): Activity {
         val baseContext = contextWrapper.baseContext ?: throw IllegalStateException("Activity was not found as base context of view!")
         return baseContext.findActivity()
     }
+}
+
+internal fun Context.getColorRes(@ColorRes color: Int): Int {
+    return ContextCompat.getColor(this, color)
+}
+
+fun View.waitForMeasure(callback: (View, Int, Int) -> Unit) {
+    val width = width
+    val height = height
+
+    if (width > 0 && height > 0) {
+        callback(this, width, height)
+        return
+    }
+
+    val view = this
+    viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+        override fun onPreDraw(): Boolean {
+            val observer = viewTreeObserver
+            if (observer.isAlive) {
+                observer.removeOnPreDrawListener(this)
+            }
+
+            callback(view, width, height)
+
+            return true
+        }
+    })
 }

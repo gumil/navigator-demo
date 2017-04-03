@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Navigator Demos</string>
-    <string name="fab_dialog_transition_name">transition.fab</string>
-    <string name="transition_tag_dot_indexed">transition.dot%1$d</string>
-    <string name="transition_tag_title_indexed">transition.title%1$d</string>
 
     <!-- Home Controller -->
     <string name="about">About</string>
@@ -12,4 +9,12 @@
     <string name="go_up">Go Up</string>
     <string name="next_controller">Next Controller</string>
     <string name="navigation_title">Controller #%1$d</string>
+
+    <!-- Transitions -->
+    <string name="fab_dialog_transition_name">transition.fab</string>
+    <string name="transition_tag_dot">transition.dot</string>
+    <string name="transition_tag_title">transition.title</string>
+    <string name="transition_tag_dot_indexed">transition.dot%1$d</string>
+    <string name="transition_tag_title_indexed">transition.title%1$d</string>
+
 </resources>
