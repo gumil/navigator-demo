@@ -4,7 +4,13 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.support.annotation.ColorRes
 import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import com.zhuinden.navigator.Navigator
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.changehandler.CircularRevealChangeHandler
+import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
+import io.github.gumil.testnavigator.changehandler.FlipChangeHandler
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.home.HomeDemoModel
 import io.github.gumil.testnavigator.utils.getColorRes
@@ -17,9 +23,12 @@ internal class TransitionLayout(
         val index: Int
 ): ViewLayout() {
 
+    lateinit var container: ViewGroup
+    lateinit var viewNext: View
+
     override fun createView(context: Context) = with(context) {
         toolbarTitle = HomeDemoModel.TRANSITIONS.title
-        frameLayout {
+        container = frameLayout {
             view {
                 backgroundColor = getColorRes(colorId)
             }.lparams(matchParent, matchParent)
@@ -32,17 +41,24 @@ internal class TransitionLayout(
                 transitionName = getString(R.string.transition_tag_title)
             }
 
-            floatingActionButton {
+            viewNext = floatingActionButton {
                 imageResource = R.drawable.ic_arrow_forward_white_36dp
                 elevation = dip(0).toFloat()
                 compatElevation = dip(0).toFloat()
                 transitionName = getString(R.string.transition_tag_dot)
                 backgroundTintList = ColorStateList.valueOf(getColorRes(getButtonColor()))
+
+                onClick {
+                    goTo(ctx, TransitionDemo.fromIndex(index + 1))
+                }
+
             }.lparams(wrapContent, wrapContent) {
                 gravity = Gravity.BOTTOM or Gravity.END
                 margin = dip(24)
             }
         }
+
+        container
     }
 
     @ColorRes
@@ -57,6 +73,24 @@ internal class TransitionLayout(
         }
 
         return buttonColor
+    }
+
+    private fun goTo(context: Context, demo: TransitionDemo) {
+        val backstack = Navigator.getBackstack(context)
+        when (demo) {
+            TransitionDemo.VERTICAL ->
+                backstack.goTo(TransitionKey())
+            TransitionDemo.CIRCULAR ->
+                backstack.goTo(TransitionKey(demo,
+                        CircularRevealChangeHandler(viewNext, container)))
+            TransitionDemo.FADE ->
+                backstack.goTo(TransitionKey(demo,
+                        FadeChangeHandler()))
+            TransitionDemo.FLIP -> TODO()
+            TransitionDemo.HORIZONTAL -> TODO()
+            TransitionDemo.ARC_FADE -> TODO()
+            TransitionDemo.ARC_FADE_RESET -> TODO()
+        }
     }
 
 }

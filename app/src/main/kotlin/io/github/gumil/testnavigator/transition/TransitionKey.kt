@@ -3,16 +3,19 @@ package io.github.gumil.testnavigator.transition
 import android.os.Parcel
 import android.os.Parcelable
 import com.zhuinden.navigator.ViewChangeHandler
+import io.github.gumil.testnavigator.changehandler.VerticalChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class TransitionKey(
-        val transitionDemo: TransitionDemo = TransitionDemo.VERTICAL
+        val transitionDemo: TransitionDemo = TransitionDemo.VERTICAL,
+        val changeHandler: ViewChangeHandler = VerticalChangeHandler()
 ): ViewKey {
 
-    override fun layout() = TransitionLayout(transitionDemo.colorId, transitionDemo.title, transitionDemo.ordinal)
+    override fun layout() = TransitionLayout(transitionDemo.colorId,
+            transitionDemo.title, transitionDemo.ordinal)
 
     override fun viewChangeHandler(): ViewChangeHandler {
-        return transitionDemo.changeHandler
+        return changeHandler
     }
 
     constructor(parcel: Parcel): this(
