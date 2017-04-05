@@ -3,11 +3,16 @@ package io.github.gumil.testnavigator.transition
 import android.content.Context
 import android.content.res.ColorStateList
 import android.support.annotation.ColorRes
+import android.support.design.widget.FloatingActionButton
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.zhuinden.navigator.Navigator
+import com.zhuinden.navigator.changehandlers.NoOpViewChangeHandler
+import com.zhuinden.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.changehandler.ArcFadeMoveChangeHandler
 import io.github.gumil.testnavigator.changehandler.CircularRevealChangeHandler
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.changehandler.FlipChangeHandler
@@ -21,54 +26,88 @@ internal class TransitionLayout(
         @ColorRes val colorId: Int,
         val title: String,
         val index: Int
-): ViewLayout() {
+) : ViewLayout() {
 
     lateinit var container: ViewGroup
     lateinit var viewNext: View
 
     override fun createView(context: Context) = with(context) {
         toolbarTitle = HomeDemoModel.TRANSITIONS.title
-        container = frameLayout {
-            view {
-                backgroundColor = getColorRes(colorId)
-            }.lparams(matchParent, matchParent)
-
-            textView(title) {
-                gravity = Gravity.CENTER_HORIZONTAL
-                textSize = 20f
-            }.lparams(matchParent, dip(80)) {
-                topMargin = dip(96)
-                transitionName = getString(R.string.transition_tag_title)
-            }
-
-            viewNext = floatingActionButton {
-                imageResource = R.drawable.ic_arrow_forward_white_36dp
-                elevation = dip(0).toFloat()
-                compatElevation = dip(0).toFloat()
-                transitionName = getString(R.string.transition_tag_dot)
-                backgroundTintList = ColorStateList.valueOf(getColorRes(getButtonColor()))
-
-                onClick {
-                    goTo(ctx, TransitionDemo.fromIndex(index + 1))
-                }
-
-            }.lparams(wrapContent, wrapContent) {
-                gravity = Gravity.BOTTOM or Gravity.END
-                margin = dip(24)
-            }
-        }
+        container = if (index == 5) getSharedView() else getNormalView()
 
         container
     }
 
-    @ColorRes
-    fun getButtonColor(): Int {
-        val nextIndex = index + 1
-        val buttonColor =  if (nextIndex < TransitionDemo.values().size) {
-            TransitionDemo.fromIndex(nextIndex).colorId
-        } else { 0 }
+    private fun Context.getNormalView(): ViewGroup {
+        return frameLayout {
+            view {
+                backgroundColor = getColorRes(colorId)
+            }.lparams(matchParent, matchParent)
 
-        if(buttonColor == 0) {
+            textView(title)
+                    .setAttributes(ctx)
+                    .lparams(matchParent, dip(80)) {
+                        topMargin = dip(96)
+                    }
+
+            viewNext = floatingActionButton()
+                    .setAttributes(ctx)
+                    .lparams(wrapContent, wrapContent) {
+                        gravity = Gravity.BOTTOM or Gravity.END
+                        margin = dip(24)
+                    }
+        }
+    }
+
+    private fun Context.getSharedView(): ViewGroup {
+        return frameLayout {
+            textView(title)
+                    .setAttributes(ctx)
+                    .lparams(matchParent, dip(80)) {
+                        topMargin = dip(24)
+                    }
+
+            viewNext = floatingActionButton()
+                    .setAttributes(ctx)
+                    .lparams(wrapContent, wrapContent) {
+                        gravity = Gravity.CENTER
+                        margin = dip(24)
+                    }
+        }
+    }
+
+    private fun TextView.setAttributes(context: Context): TextView {
+        id = 123456
+        transitionName = context.getString(R.string.transition_tag_title)
+        textSize = 20f
+        gravity = Gravity.CENTER_HORIZONTAL
+
+        return this
+    }
+
+    private fun FloatingActionButton.setAttributes(context: Context): FloatingActionButton {
+        id = 654321
+        imageResource = R.drawable.ic_arrow_forward_white_36dp
+        elevation = dip(0).toFloat()
+        compatElevation = dip(0).toFloat()
+        transitionName = context.getString(R.string.transition_tag_dot)
+        backgroundTintList = ColorStateList.valueOf(context.getColorRes(getButtonColor()))
+
+        onClick {
+            goTo(context, TransitionDemo.fromIndex(index + 1))
+        }
+
+        return this
+    }
+
+    @ColorRes
+    private fun getButtonColor(): Int {
+        val nextIndex = index + 1
+        val buttonColor = if (nextIndex < TransitionDemo.values().size) {
+            TransitionDemo.fromIndex(nextIndex).colorId
+        } else 0
+
+        if (buttonColor == 0) {
             return TransitionDemo.fromIndex(0).colorId
         }
 
@@ -76,21 +115,23 @@ internal class TransitionLayout(
     }
 
     private fun goTo(context: Context, demo: TransitionDemo) {
-        val backstack = Navigator.getBackstack(context)
-        when (demo) {
-            TransitionDemo.VERTICAL ->
-                backstack.goTo(TransitionKey())
-            TransitionDemo.CIRCULAR ->
-                backstack.goTo(TransitionKey(demo,
-                        CircularRevealChangeHandler(viewNext, container)))
-            TransitionDemo.FADE ->
-                backstack.goTo(TransitionKey(demo,
-                        FadeChangeHandler()))
-            TransitionDemo.FLIP -> TODO()
-            TransitionDemo.HORIZONTAL -> TODO()
-            TransitionDemo.ARC_FADE -> TODO()
-            TransitionDemo.ARC_FADE_RESET -> TODO()
-        }
+        val transitionKey =
+                when (demo) {
+                    TransitionDemo.VERTICAL -> TransitionKey()
+                    TransitionDemo.CIRCULAR -> TransitionKey(demo,
+                            CircularRevealChangeHandler(viewNext, container))
+                    TransitionDemo.FADE -> TransitionKey(demo,
+                            FadeChangeHandler())
+                    TransitionDemo.FLIP -> TransitionKey(demo,
+                            FlipChangeHandler())
+                    TransitionDemo.HORIZONTAL -> TransitionKey(demo,
+                            SegueViewChangeHandler())
+                    TransitionDemo.ARC_FADE -> TransitionKey(demo,
+                            ArcFadeMoveChangeHandler())
+                    TransitionDemo.ARC_FADE_RESET -> TODO()
+                }
+
+        Navigator.getBackstack(context).goTo(transitionKey)
     }
 
 }

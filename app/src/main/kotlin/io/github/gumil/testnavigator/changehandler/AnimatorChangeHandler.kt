@@ -8,27 +8,23 @@ import com.zhuinden.navigator.ViewChangeHandler
 import com.zhuinden.simplestack.StateChange
 import io.github.gumil.testnavigator.utils.waitForMeasure
 
-abstract class SingleViewChangeHandler: ViewChangeHandler {
+abstract class AnimatorChangeHandler : ViewChangeHandler {
 
     override fun performViewChange(container: ViewGroup,
                                    previousView: View,
                                    newView: View,
                                    direction: Int,
                                    completionCallback: ViewChangeHandler.CompletionCallback) {
-
-        val view = if (direction == StateChange.FORWARD) {
+        if (direction == StateChange.FORWARD) {
             container.addView(newView)
-            newView
         } else {
-            container.getChildAt(container.childCount - 1)
+            container.addView(newView, container.indexOfChild(previousView))
         }
 
-        view.waitForMeasure { view, width, height ->
-            runAnimation(view, direction, object : AnimatorListenerAdapter() {
+        newView.waitForMeasure { view, width, height ->
+            runAnimation(previousView, view, direction, object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    if (direction == -1) {
-                        container.removeView(view)
-                    }
+                    container.removeView(previousView)
                     completionCallback.onCompleted()
                 }
             })
@@ -36,11 +32,11 @@ abstract class SingleViewChangeHandler: ViewChangeHandler {
     }
 
     // animation
-    private fun runAnimation(view: View, direction: Int, animatorListenerAdapter: AnimatorListenerAdapter) {
-        val animator = createAnimator(view, direction)
+    private fun runAnimation(previousView: View, newView: View, direction: Int, animatorListenerAdapter: AnimatorListenerAdapter) {
+        val animator = createAnimator(previousView, newView, direction)
         animator.addListener(animatorListenerAdapter)
         animator.start()
     }
 
-    abstract fun createAnimator(view: View, direction: Int): Animator
+    abstract fun createAnimator(previousView: View, newView: View, direction: Int): Animator
 }

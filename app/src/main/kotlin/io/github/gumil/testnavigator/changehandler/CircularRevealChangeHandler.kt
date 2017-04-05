@@ -9,7 +9,7 @@ import com.zhuinden.simplestack.StateChange
 class CircularRevealChangeHandler(
         fromView: View,
         containerView: ViewGroup
-) : SingleViewChangeHandler() {
+) : AnimatorChangeHandler() {
 
     private val cx: Int
     private val cy: Int
@@ -28,14 +28,14 @@ class CircularRevealChangeHandler(
         cy = fromView.height / 2 + relativeTop
     }
 
-    override fun createAnimator(view: View, direction: Int): Animator {
+    override fun createAnimator(previousView: View, newView: View, direction: Int): Animator {
         val radius = Math.hypot(cx.toDouble(), cy.toDouble()).toFloat()
 
         val isPush = direction == StateChange.FORWARD
         return if (isPush) {
-            ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, radius)
+            ViewAnimationUtils.createCircularReveal(newView, cx, cy, 0f, radius)
         } else {
-            ViewAnimationUtils.createCircularReveal(view, cx, cy, radius, 0f)
+            ViewAnimationUtils.createCircularReveal(previousView, cx, cy, radius, 0f)
         }
     }
 

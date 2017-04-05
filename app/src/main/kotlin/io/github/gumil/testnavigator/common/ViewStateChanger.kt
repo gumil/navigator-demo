@@ -9,6 +9,7 @@ import com.zhuinden.navigator.ViewChangeHandler
 import com.zhuinden.navigator.changehandlers.NoOpViewChangeHandler
 import com.zhuinden.simplestack.StateChange
 import com.zhuinden.simplestack.StateChanger
+import io.github.gumil.testnavigator.MainActivity
 
 internal class ViewStateChanger(
         val context: Context,
@@ -59,10 +60,12 @@ internal class ViewStateChanger(
             Navigator.restoreViewFromState(newView)
 
             newKey.onChangeStarted()
+            setAnimating(context, true)
             if (previousView == null) {
                 container.addView(newView)
                 finishStateChange(stateChange, container, previousView, newView, completionCallback)
                 newKey.onChangeEnded()
+                setAnimating(context, false)
             } else {
                 val viewChangeHandler: ViewChangeHandler
                 if (stateChange.direction == StateChange.FORWARD) {
@@ -79,8 +82,15 @@ internal class ViewStateChanger(
                 ) {
                     finishStateChange(stateChange, container, previousView, newView, completionCallback)
                     newKey.onChangeEnded()
+                    setAnimating(context, false)
                 }
             }
         })
+    }
+
+    private fun setAnimating(context: Context, isAnimating: Boolean) {
+        (context as? MainActivity)?.let {
+            it.isAnimating = isAnimating
+        }
     }
 }
