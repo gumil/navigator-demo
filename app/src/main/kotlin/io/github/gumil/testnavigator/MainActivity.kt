@@ -8,6 +8,7 @@ import com.zhuinden.navigator.Navigator
 import com.zhuinden.simplestack.HistoryBuilder
 import io.github.gumil.testnavigator.home.HomeKey
 import io.github.gumil.testnavigator.common.ViewStateChanger
+import org.jetbrains.anko.frameLayout
 
 internal class MainActivity : AppCompatActivity() {
 
@@ -15,8 +16,7 @@ internal class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val root = findViewById(R.id.root) as ViewGroup
+        val root = frameLayout {  }
 
         Navigator.configure()
                 .setStateChanger(ViewStateChanger(this, root))
