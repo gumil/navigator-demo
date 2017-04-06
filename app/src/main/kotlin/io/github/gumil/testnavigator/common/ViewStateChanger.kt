@@ -12,10 +12,10 @@ import com.zhuinden.simplestack.StateChanger
 import io.github.gumil.testnavigator.MainActivity
 
 internal class ViewStateChanger(
-        val context: Context,
-        val container: ViewGroup,
-        var externalStateChanger: StateChanger = ViewStateChanger.NoOpStateChanger(),
-        var viewChangeCompletionListener: DefaultStateChanger.ViewChangeCompletionListener = ViewStateChanger.NoOpViewChangeCompletionListener()
+        private val context: Context,
+        private val container: ViewGroup,
+        private var externalStateChanger: StateChanger = ViewStateChanger.NoOpStateChanger(),
+        private var viewChangeCompletionListener: DefaultStateChanger.ViewChangeCompletionListener = ViewStateChanger.NoOpViewChangeCompletionListener()
 ) : StateChanger {
 
     private class NoOpStateChanger : StateChanger {

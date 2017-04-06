@@ -7,7 +7,7 @@ import com.zhuinden.navigator.changehandlers.NoOpViewChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class HomeKey(
-        val tag: String = HomeKey::javaClass.name
+        private val tag: String = HomeKey::javaClass.name
 ) : ViewKey {
 
     override fun layout() = HomeLayout()

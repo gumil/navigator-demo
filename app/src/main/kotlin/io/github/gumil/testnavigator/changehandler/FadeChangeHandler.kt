@@ -10,8 +10,8 @@ class FadeChangeHandler : AnimatorViewChangeHandler() {
 
     override fun createAnimator(previousView: View, newView: View, direction: Int): Animator {
         val set = AnimatorSet()
-        set.play(ObjectAnimator.ofFloat(previousView, "alpha", 1f, 0f))
-        set.play(ObjectAnimator.ofFloat(newView, "alpha", 0f, 1f))
+        set.play(ObjectAnimator.ofFloat(previousView, View.ALPHA, 1f, 0f))
+        set.play(ObjectAnimator.ofFloat(newView, View.ALPHA, 0f, 1f))
         return set
     }
 

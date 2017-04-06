@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.zhuinden.navigator.Navigator
-import com.zhuinden.navigator.changehandlers.NoOpViewChangeHandler
 import com.zhuinden.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.changehandler.ArcFadeMoveChangeHandler
@@ -18,18 +17,23 @@ import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.changehandler.FlipChangeHandler
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.home.HomeDemoModel
+import io.github.gumil.testnavigator.home.HomeKey
 import io.github.gumil.testnavigator.utils.getColorRes
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.floatingActionButton
 
 internal class TransitionLayout(
-        @ColorRes val colorId: Int,
-        val title: String,
-        val index: Int
+        private @ColorRes val colorId: Int,
+        private val title: String,
+        private val index: Int
 ) : ViewLayout() {
 
     lateinit var container: ViewGroup
     lateinit var viewNext: View
+
+    companion object {
+        private const val containerId = 1
+    }
 
     override fun createView(context: Context) = with(context) {
         toolbarTitle = HomeDemoModel.TRANSITIONS.title
@@ -40,6 +44,7 @@ internal class TransitionLayout(
 
     private fun Context.getNormalView(): ViewGroup {
         return frameLayout {
+            id = containerId
             view {
                 backgroundColor = getColorRes(colorId)
             }.lparams(matchParent, matchParent)
@@ -61,6 +66,7 @@ internal class TransitionLayout(
 
     private fun Context.getSharedView(): ViewGroup {
         return frameLayout {
+            id = containerId
             textView(title)
                     .setAttributes(ctx)
                     .lparams(matchParent, dip(80)) {
@@ -94,7 +100,7 @@ internal class TransitionLayout(
         backgroundTintList = ColorStateList.valueOf(context.getColorRes(getButtonColor()))
 
         onClick {
-            goTo(context, TransitionDemo.fromIndex(index + 1))
+            goTo(context, index + 1)
         }
 
         return this
@@ -114,7 +120,14 @@ internal class TransitionLayout(
         return buttonColor
     }
 
-    private fun goTo(context: Context, demo: TransitionDemo) {
+    private fun goTo(context: Context, index: Int) {
+
+        if (index >= TransitionDemo.values().size) {
+            Navigator.getBackstack(context).goTo(HomeKey())
+            return
+        }
+
+        val demo = TransitionDemo.fromIndex(index)
         val transitionKey =
                 when (demo) {
                     TransitionDemo.VERTICAL -> TransitionKey()
@@ -128,10 +141,10 @@ internal class TransitionLayout(
                             SegueViewChangeHandler())
                     TransitionDemo.ARC_FADE -> TransitionKey(demo,
                             ArcFadeMoveChangeHandler())
-                    TransitionDemo.ARC_FADE_RESET -> TODO()
+                    TransitionDemo.ARC_FADE_RESET -> TransitionKey(demo,
+                            ArcFadeMoveChangeHandler())
                 }
 
         Navigator.getBackstack(context).goTo(transitionKey)
     }
-
 }

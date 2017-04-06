@@ -16,8 +16,8 @@ import io.github.gumil.testnavigator.utils.getMaterialColor
 import org.jetbrains.anko.*
 
 internal class NavigationLayout(
-        val index: Int = 0,
-        val displayUpMode: DisplayUpMode = DisplayUpMode.SHOW_FOR_CHILDREN_ONLY
+        private val index: Int = 0,
+        private val displayUpMode: DisplayUpMode = DisplayUpMode.SHOW_FOR_CHILDREN_ONLY
 ) : ViewLayout() {
 
     private lateinit var popButton: Button

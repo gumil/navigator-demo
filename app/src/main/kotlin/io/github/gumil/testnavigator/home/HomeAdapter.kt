@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 
 internal class HomeAdapter(
-        val items: Array<HomeDemoModel> = HomeDemoModel.values()
+        private val items: Array<HomeDemoModel> = HomeDemoModel.values()
 ) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     var onRowClicked: ((HomeDemoModel, Int) -> Unit)? = null

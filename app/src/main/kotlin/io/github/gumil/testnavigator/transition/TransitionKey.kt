@@ -7,9 +7,15 @@ import io.github.gumil.testnavigator.changehandler.VerticalChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class TransitionKey(
-        val transitionDemo: TransitionDemo = TransitionDemo.VERTICAL,
-        val changeHandler: ViewChangeHandler = VerticalChangeHandler()
-): ViewKey {
+        private val transitionDemo: TransitionDemo = TransitionDemo.VERTICAL
+) : ViewKey {
+
+    private var changeHandler: ViewChangeHandler = VerticalChangeHandler()
+
+    constructor(transitionDemo: TransitionDemo,
+                changeHandler: ViewChangeHandler): this(transitionDemo) {
+        this.changeHandler = changeHandler
+    }
 
     override fun layout() = TransitionLayout(transitionDemo.colorId,
             transitionDemo.title, transitionDemo.ordinal)
@@ -18,7 +24,7 @@ internal data class TransitionKey(
         return changeHandler
     }
 
-    constructor(parcel: Parcel): this(
+    constructor(parcel: Parcel) : this(
             TransitionDemo.fromIndex(parcel.readInt())
     )
 
