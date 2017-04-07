@@ -16,5 +16,6 @@
     <string name="transition_tag_title">transition.title</string>
     <string name="transition_tag_dot_indexed">transition.dot%1$d</string>
     <string name="transition_tag_title_indexed">transition.title%1$d</string>
-
+    <string name="transition_tag_image_named">transition.image%1$s</string>
+    <string name="transition_tag_title_named">transition.title%1$s</string>
 </resources>

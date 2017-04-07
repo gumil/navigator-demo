@@ -9,6 +9,7 @@ import com.zhuinden.navigator.Navigator
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.navigation.NavigationKey
+import io.github.gumil.testnavigator.sharedelement.CityGridKey
 import io.github.gumil.testnavigator.transition.TransitionKey
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.floatingActionButton
@@ -48,15 +49,16 @@ internal class HomeLayout : ViewLayout() {
 
         private fun onRowClicked(): (HomeDemoModel, Int) -> Unit {
             return { homeDemoModel, position ->
+                val backstack = Navigator.getBackstack(view.context)
                 when (homeDemoModel) {
                     HomeDemoModel.NAVIGATION -> {
-                        Navigator.getBackstack(view.context).goTo(NavigationKey())
+                        backstack.goTo(NavigationKey())
                     }
                     HomeDemoModel.TRANSITIONS -> {
-                        Navigator.getBackstack(view.context).goTo(TransitionKey())
+                        backstack.goTo(TransitionKey())
                     }
                     HomeDemoModel.SHARED_ELEMENT_TRANSITIONS -> {
-
+                        backstack.goTo(CityGridKey(homeDemoModel, position))
                     }
                     HomeDemoModel.CHILD_CONTROLLERS -> {
 
