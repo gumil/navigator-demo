@@ -5,11 +5,14 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.support.annotation.ColorRes
+import android.support.annotation.StyleRes
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.Button
+import android.widget.TextView
 import io.github.gumil.testnavigator.R
 
 internal fun Context.getSelectableItemBackground(): Drawable {
@@ -21,7 +24,7 @@ internal fun Context.getSelectableItemBackground(): Drawable {
 
 internal fun Button.applyButtonBarStyle(): Button {
     background = context.getSelectableItemBackground()
-    setTextAppearance(context, R.style.TextAppearance_AppCompat_Widget_Button_Borderless_Colored)
+    textAppearance(R.style.TextAppearance_AppCompat_Widget_Button_Borderless_Colored)
     return this
 }
 
@@ -48,7 +51,7 @@ internal fun Context.getColorRes(@ColorRes color: Int): Int {
     return ContextCompat.getColor(this, color)
 }
 
-fun View.waitForMeasure(callback: (View, Int, Int) -> Unit) {
+internal fun View.waitForMeasure(callback: (View, Int, Int) -> Unit) {
     val width = width
     val height = height
 
@@ -70,4 +73,12 @@ fun View.waitForMeasure(callback: (View, Int, Int) -> Unit) {
             return true
         }
     })
+}
+
+internal fun TextView.textAppearance(@StyleRes style: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        setTextAppearance(style)
+    } else {
+        setTextAppearance(context, style)
+    }
 }

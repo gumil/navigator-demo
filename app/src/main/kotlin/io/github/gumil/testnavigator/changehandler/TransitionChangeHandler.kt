@@ -31,14 +31,22 @@ abstract class TransitionChangeHandler: ViewChangeHandler {
             override fun onTransitionStart(transition: Transition?) { }
         })
 
-        TransitionManager.beginDelayedTransition(container, transition)
-        executePropertyChanges(container, previousView, newView, direction)
+        prepareForTransition(container, previousView, newView, transition, direction) {
+            TransitionManager.beginDelayedTransition(container, transition)
+            executePropertyChanges(container, previousView, newView, direction)
+        }
+    }
+
+    protected open fun prepareForTransition(container: ViewGroup, previousView: View, newView: View,
+                             transition: Transition, direction: Int,
+                             onTransitionPreparedListener: () -> Unit) {
+        onTransitionPreparedListener()
     }
 
 
     abstract fun getTransition(container: ViewGroup, previousView: View, newView: View, direction: Int): Transition
 
-    private fun executePropertyChanges(container: ViewGroup,
+    protected open fun executePropertyChanges(container: ViewGroup,
                                        previousView: View,
                                        newView: View,
                                        direction: Int) {

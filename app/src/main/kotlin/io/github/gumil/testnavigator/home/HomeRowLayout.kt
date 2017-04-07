@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.utils.getSelectableItemBackground
+import io.github.gumil.testnavigator.utils.textAppearance
 import org.jetbrains.anko.*
 
 
@@ -37,7 +38,7 @@ internal class HomeRowLayout : ViewLayout() {
             }
 
             title = textView {
-                setTextAppearance(ctx, android.R.style.TextAppearance_Large)
+                textAppearance(android.R.style.TextAppearance_Large)
             }
 
             background = getSelectableItemBackground()

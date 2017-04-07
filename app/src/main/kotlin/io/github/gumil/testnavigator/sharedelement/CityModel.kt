@@ -3,7 +3,7 @@ package io.github.gumil.testnavigator.sharedelement
 import android.support.annotation.DrawableRes
 import io.github.gumil.testnavigator.R
 
-enum class CityModel(
+internal enum class CityModel(
         @DrawableRes val drawableRes: Int = 0,
         val title: String
 ) {

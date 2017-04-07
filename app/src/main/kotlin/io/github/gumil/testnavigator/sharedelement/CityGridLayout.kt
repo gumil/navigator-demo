@@ -5,11 +5,15 @@ import android.graphics.PorterDuff
 import android.support.annotation.ColorRes
 import android.support.v7.widget.GridLayoutManager
 import android.view.Gravity
+import com.zhuinden.navigator.Navigator
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.common.ViewLayout
+import io.github.gumil.testnavigator.sharedelement.detail.CityDetailKey
 import io.github.gumil.testnavigator.utils.getColorRes
+import io.github.gumil.testnavigator.utils.textAppearance
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
+import java.util.ArrayList
 
 internal class CityGridLayout(
         private val title: String,
@@ -38,7 +42,7 @@ internal class CityGridLayout(
             }.lparams(dip(96), dip(96))
 
             textView(title) {
-                setTextAppearance(ctx, android.R.style.TextAppearance_Large)
+                textAppearance(android.R.style.TextAppearance_Large)
                 transitionName = getString(R.string.transition_tag_title_indexed, fromPosition)
             }.lparams(wrapContent, wrapContent) {
                 topMargin = dip(40)
@@ -56,13 +60,15 @@ internal class CityGridLayout(
 
     private fun onRowClicked(): (CityModel) -> Unit {
         return {
-            when (it) {
-                CityModel.CHICAGO -> TODO()
-                CityModel.JAKARTA -> TODO()
-                CityModel.LONDON -> TODO()
-                CityModel.SAO_PAULO -> TODO()
-                CityModel.TOKYO -> TODO()
-            }
+            val imageTransitionName = view.context.getString(R.string.transition_tag_image_named, it.title)
+            val titleTransitionName = view.context.getString(R.string.transition_tag_title_named, it.title)
+
+            val names = ArrayList<String>()
+            names.add(imageTransitionName)
+            names.add(titleTransitionName)
+
+            Navigator.getBackstack(view.context).goTo(CityDetailKey(it.drawableRes, it.title, names))
+
         }
     }
 }

@@ -4,7 +4,7 @@ import android.transition.*
 import android.view.View
 import android.view.ViewGroup
 
-class ArcFadeMoveChangeHandler : TransitionChangeHandler() {
+open class ArcFadeMoveChangeHandler : TransitionChangeHandler() {
 
     override fun getTransition(container: ViewGroup,
                                previousView: View,

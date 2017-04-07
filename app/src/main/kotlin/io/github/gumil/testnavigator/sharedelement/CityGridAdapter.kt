@@ -2,7 +2,6 @@ package io.github.gumil.testnavigator.sharedelement
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import io.github.gumil.testnavigator.R
 
 internal class CityGridAdapter : RecyclerView.Adapter<CityGridAdapter.ViewHolder>() {
 
@@ -29,7 +28,7 @@ internal class CityGridAdapter : RecyclerView.Adapter<CityGridAdapter.ViewHolder
 
         fun bind(item: CityModel) {
             cityRow.onRowClicked = {
-
+                onRowClicked?.invoke(item)
             }
             cityRow.bind(item)
         }

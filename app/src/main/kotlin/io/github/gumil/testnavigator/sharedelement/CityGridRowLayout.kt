@@ -7,12 +7,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.common.ViewLayout
+import io.github.gumil.testnavigator.utils.textAppearance
 import org.jetbrains.anko.*
 
 internal class CityGridRowLayout : ViewLayout() {
 
-    lateinit var image: ImageView
-    lateinit var title: TextView
+    lateinit var imageView: ImageView
+    lateinit var textView: TextView
 
     var onRowClicked: ((CityModel) -> Unit)? = null
 
@@ -24,13 +25,13 @@ internal class CityGridRowLayout : ViewLayout() {
             gravity = Gravity.CENTER_VERTICAL
             padding = dip(8)
 
-            image = imageView().lparams(matchParent, 0) {
+            imageView = imageView().lparams(matchParent, 0) {
                 weight = 1f
                 bottomMargin = dip(16)
             }
 
-            title = textView {
-                setTextAppearance(ctx, android.R.style.TextAppearance_Large)
+            textView = textView {
+                textAppearance(android.R.style.TextAppearance_Large)
             }.lparams(wrapContent, wrapContent) {
                 gravity = Gravity.CENTER_HORIZONTAL
             }
@@ -38,11 +39,11 @@ internal class CityGridRowLayout : ViewLayout() {
     }
 
     fun bind(item: CityModel) {
-        image.setImageResource(item.drawableRes)
-        title.text = item.title
+        imageView.setImageResource(item.drawableRes)
+        textView.text = item.title
 
-        image.transitionName = view.context.getString(R.string.transition_tag_title_named, item.title)
-        title.transitionName = view.context.getString(R.string.transition_tag_image_named, item.title)
+        imageView.transitionName = view.context.getString(R.string.transition_tag_title_named, item.title)
+        textView.transitionName = view.context.getString(R.string.transition_tag_image_named, item.title)
 
         view.setOnClickListener {
             onRowClicked?.invoke(item)
