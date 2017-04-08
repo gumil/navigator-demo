@@ -28,6 +28,7 @@ internal class CityGridLayout(
     }
 
     override fun createView(context: Context) = with(context) {
+        toolbarTitle = title
         verticalLayout {
             val normalPadding = resources.getDimensionPixelSize(R.dimen.padding_normal)
             setPadding(normalPadding, normalPadding, normalPadding, 0)
