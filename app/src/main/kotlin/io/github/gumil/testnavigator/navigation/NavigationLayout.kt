@@ -5,10 +5,10 @@ import android.graphics.Color
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
-import com.zhuinden.navigator.Navigator
-import com.zhuinden.navigator.changehandlers.SegueViewChangeHandler
-import io.github.gumil.testnavigator.common.ViewLayout
+import com.zhuinden.simplestack.navigator.Navigator
+import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.home.HomeDemoModel
 import io.github.gumil.testnavigator.home.HomeKey
 import io.github.gumil.testnavigator.utils.applyButtonBarStyle

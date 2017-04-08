@@ -4,8 +4,8 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.view.View
 import android.view.ViewGroup
-import com.zhuinden.navigator.ViewChangeHandler
 import com.zhuinden.simplestack.StateChange
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.utils.waitForMeasure
 
 abstract class AnimatorChangeHandler : ViewChangeHandler {

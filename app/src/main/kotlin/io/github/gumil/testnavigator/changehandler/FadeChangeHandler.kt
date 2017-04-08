@@ -4,7 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
-import com.zhuinden.navigator.changehandlers.AnimatorViewChangeHandler
+import com.zhuinden.simplestack.navigator.changehandlers.AnimatorViewChangeHandler
 
 class FadeChangeHandler : AnimatorViewChangeHandler() {
 

@@ -5,9 +5,9 @@ import android.content.Context
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Gravity
 import android.widget.ImageView
-import com.zhuinden.navigator.Navigator
-import io.github.gumil.testnavigator.common.ViewLayout
+import com.zhuinden.simplestack.navigator.Navigator
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.navigation.NavigationKey
 import io.github.gumil.testnavigator.sharedelement.CityGridKey
 import io.github.gumil.testnavigator.transition.TransitionKey

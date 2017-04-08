@@ -5,7 +5,7 @@ import android.graphics.PorterDuff
 import android.support.annotation.ColorRes
 import android.support.v7.widget.GridLayoutManager
 import android.view.Gravity
-import com.zhuinden.navigator.Navigator
+import com.zhuinden.simplestack.navigator.Navigator
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.sharedelement.detail.CityDetailKey
@@ -13,7 +13,7 @@ import io.github.gumil.testnavigator.utils.getColorRes
 import io.github.gumil.testnavigator.utils.textAppearance
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
-import java.util.ArrayList
+import java.util.*
 
 internal class CityGridLayout(
         private val title: String,

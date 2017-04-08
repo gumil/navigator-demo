@@ -2,8 +2,8 @@ package io.github.gumil.testnavigator.home
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.zhuinden.navigator.ViewChangeHandler
-import com.zhuinden.navigator.changehandlers.NoOpViewChangeHandler
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
+import com.zhuinden.simplestack.navigator.changehandlers.NoOpViewChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class HomeKey(

@@ -2,10 +2,10 @@ package io.github.gumil.testnavigator.navigation
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.zhuinden.navigator.ViewChangeHandler
-import io.github.gumil.testnavigator.common.ViewLayout
-import io.github.gumil.testnavigator.common.ViewKey
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
+import io.github.gumil.testnavigator.common.ViewKey
+import io.github.gumil.testnavigator.common.ViewLayout
 
 internal data class NavigationKey(
         private val index: Int = 0,

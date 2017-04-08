@@ -1,8 +1,7 @@
 package io.github.gumil.testnavigator.common
 
 import android.os.Parcelable
-import com.zhuinden.navigator.ViewChangeHandler
-import io.github.gumil.testnavigator.common.ViewLayout
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
 
 internal interface ViewKey: Parcelable {
 

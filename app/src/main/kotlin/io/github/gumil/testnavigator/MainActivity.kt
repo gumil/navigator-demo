@@ -1,13 +1,12 @@
 package io.github.gumil.testnavigator
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
-import android.view.ViewGroup
-import com.zhuinden.navigator.Navigator
 import com.zhuinden.simplestack.HistoryBuilder
-import io.github.gumil.testnavigator.home.HomeKey
+import com.zhuinden.simplestack.navigator.Navigator
 import io.github.gumil.testnavigator.common.ViewStateChanger
+import io.github.gumil.testnavigator.home.HomeKey
 import org.jetbrains.anko.frameLayout
 
 internal class MainActivity : AppCompatActivity() {

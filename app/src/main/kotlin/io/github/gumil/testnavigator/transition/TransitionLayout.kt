@@ -8,8 +8,8 @@ import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import com.zhuinden.navigator.Navigator
-import com.zhuinden.navigator.changehandlers.SegueViewChangeHandler
+import com.zhuinden.simplestack.navigator.Navigator
+import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.changehandler.ArcFadeMoveChangeHandler
 import io.github.gumil.testnavigator.changehandler.CircularRevealChangeHandler

@@ -3,12 +3,12 @@ package io.github.gumil.testnavigator.common
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
-import com.zhuinden.navigator.DefaultStateChanger
-import com.zhuinden.navigator.Navigator
-import com.zhuinden.navigator.ViewChangeHandler
-import com.zhuinden.navigator.changehandlers.NoOpViewChangeHandler
 import com.zhuinden.simplestack.StateChange
 import com.zhuinden.simplestack.StateChanger
+import com.zhuinden.simplestack.navigator.DefaultStateChanger
+import com.zhuinden.simplestack.navigator.Navigator
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
+import com.zhuinden.simplestack.navigator.changehandlers.NoOpViewChangeHandler
 import io.github.gumil.testnavigator.MainActivity
 
 internal class ViewStateChanger(
