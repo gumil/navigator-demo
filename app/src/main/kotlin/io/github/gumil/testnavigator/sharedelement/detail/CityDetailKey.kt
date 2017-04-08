@@ -3,7 +3,7 @@ package io.github.gumil.testnavigator.sharedelement.detail
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.annotation.DrawableRes
-import io.github.gumil.testnavigator.changehandler.ArcFadeMoveChangeHandler
+import io.github.gumil.testnavigator.changehandler.SharedElementDelayingChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal class CityDetailKey(
@@ -14,7 +14,7 @@ internal class CityDetailKey(
 
     override fun layout() = CityDetailLayout(imageDrawableRes, title)
 
-    override fun viewChangeHandler() = ArcFadeMoveChangeHandler()
+    override fun viewChangeHandler() = SharedElementDelayingChangeHandler(names)
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),

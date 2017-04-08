@@ -47,9 +47,9 @@ internal class CityDetailAdapter(
             return DetailViewHolder(with(parent.context) {
                 frameLayout {
                     textView {
-                        textSize = 16f
+                        textSize = 20f
                     }.lparams(wrapContent, wrapContent) {
-                        setPadding(0, dip(16), dip(16), dip(16))
+                        setPadding(dip(16), 0, dip(16), dip(16))
                     }
                 }
             })

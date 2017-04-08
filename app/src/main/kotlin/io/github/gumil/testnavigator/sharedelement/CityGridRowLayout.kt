@@ -42,8 +42,8 @@ internal class CityGridRowLayout : ViewLayout() {
         imageView.setImageResource(item.drawableRes)
         textView.text = item.title
 
-        imageView.transitionName = view.context.getString(R.string.transition_tag_title_named, item.title)
-        textView.transitionName = view.context.getString(R.string.transition_tag_image_named, item.title)
+        imageView.transitionName = view.context.getString(R.string.transition_tag_image_named, item.title)
+        textView.transitionName = view.context.getString(R.string.transition_tag_title_named, item.title)
 
         view.setOnClickListener {
             onRowClicked?.invoke(item)
