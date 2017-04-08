@@ -5,7 +5,7 @@ import android.os.Parcelable
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
-internal class PagerKey() : ViewKey {
+internal class PagerKey() : ViewKey() {
     override fun layout() = PagerLayout()
 
     override fun viewChangeHandler() = FadeChangeHandler()

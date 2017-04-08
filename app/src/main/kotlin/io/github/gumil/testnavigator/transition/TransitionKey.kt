@@ -8,7 +8,7 @@ import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class TransitionKey(
         private val transitionDemo: TransitionDemo = TransitionDemo.VERTICAL
-) : ViewKey {
+) : ViewKey() {
 
     private var changeHandler: ViewChangeHandler = VerticalChangeHandler()
 

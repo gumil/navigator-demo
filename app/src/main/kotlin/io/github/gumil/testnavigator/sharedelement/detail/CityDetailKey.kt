@@ -10,7 +10,7 @@ internal class CityDetailKey(
         @DrawableRes private val imageDrawableRes: Int,
         private val title: String,
         private val names: MutableList<String>
-): ViewKey {
+): ViewKey() {
 
     override fun layout() = CityDetailLayout(imageDrawableRes, title)
 

@@ -8,7 +8,7 @@ import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class HomeKey(
         private val tag: String = HomeKey::javaClass.name
-) : ViewKey {
+) : ViewKey() {
 
     override fun layout() = HomeLayout()
 

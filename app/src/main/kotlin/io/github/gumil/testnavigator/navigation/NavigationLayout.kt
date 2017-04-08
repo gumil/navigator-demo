@@ -56,7 +56,7 @@ internal class NavigationLayout(
 
                     onClick {
                         Navigator.getBackstack(ctx).goTo(NavigationKey().apply {
-                            viewChangeHandler = SegueViewChangeHandler()
+                            changeHandler = SegueViewChangeHandler()
                         })
                     }
                 }.lparams(0, matchParent) {
@@ -70,7 +70,7 @@ internal class NavigationLayout(
                         Navigator.getBackstack(ctx).goTo(NavigationKey(
                                 index + 1, displayUpMode.displayUpModeForChild
                         ).apply {
-                            viewChangeHandler = SegueViewChangeHandler()
+                            changeHandler = SegueViewChangeHandler()
                         })
                     }
                 }.lparams(0, matchParent) {

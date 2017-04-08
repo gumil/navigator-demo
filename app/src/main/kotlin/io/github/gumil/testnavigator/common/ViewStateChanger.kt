@@ -56,7 +56,7 @@ internal class ViewStateChanger(
             }
             val newKey = stateChange.topNewState<ViewKey>()
             val newContext = stateChange.createContext(context, newKey)
-            val newView = newKey.layout().inflate(newContext)
+            val newView = newKey.layout.inflate(newContext)
             Navigator.restoreViewFromState(newView)
 
             newKey.onChangeStarted()
@@ -69,9 +69,9 @@ internal class ViewStateChanger(
             } else {
                 val viewChangeHandler: ViewChangeHandler
                 if (stateChange.direction == StateChange.FORWARD) {
-                    viewChangeHandler = newKey.viewChangeHandler()
+                    viewChangeHandler = newKey.viewChangeHandler
                 } else if (previousKey != null && stateChange.direction == StateChange.BACKWARD) {
-                    viewChangeHandler = previousKey.viewChangeHandler()
+                    viewChangeHandler = previousKey.viewChangeHandler
                 } else {
                     viewChangeHandler = NoOpViewChangeHandler()
                 }

@@ -10,21 +10,13 @@ import io.github.gumil.testnavigator.common.ViewLayout
 internal data class NavigationKey(
         private val index: Int = 0,
         private val displayUpMode: DisplayUpMode = DisplayUpMode.SHOW_FOR_CHILDREN_ONLY
-) : ViewKey {
+) : ViewKey() {
 
-    var viewChangeHandler: ViewChangeHandler = FadeChangeHandler()
+    var changeHandler: ViewChangeHandler = FadeChangeHandler()
 
-    private val navigationLayout by lazy {
-        NavigationLayout(index, displayUpMode)
-    }
+    override fun layout() = NavigationLayout(index, displayUpMode)
 
-    override fun layout(): ViewLayout {
-        return navigationLayout
-    }
-
-    override fun viewChangeHandler(): ViewChangeHandler {
-        return viewChangeHandler
-    }
+    override fun viewChangeHandler() = changeHandler
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -52,10 +44,10 @@ internal data class NavigationKey(
     }
 
     override fun onChangeStarted() {
-        navigationLayout.setButtonsEnabled(false)
+        (layout as? NavigationLayout)?.setButtonsEnabled(false)
     }
 
     override fun onChangeEnded() {
-        navigationLayout.setButtonsEnabled(true)
+        (layout as? NavigationLayout)?.setButtonsEnabled(true)
     }
 }

@@ -9,7 +9,7 @@ import io.github.gumil.testnavigator.home.HomeDemoModel
 internal class CityGridKey(
         private val homeDemoModel: HomeDemoModel,
         private val position: Int
-): ViewKey {
+): ViewKey() {
     override fun layout() = CityGridLayout(homeDemoModel.title, homeDemoModel.color, position)
 
     override fun viewChangeHandler() = ArcFadeMoveChangeHandler()

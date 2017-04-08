@@ -9,13 +9,9 @@ internal class ChildKey(
         private val title: String,
         private val bgColor: Int,
         private val isColorRes: Boolean
-): ViewKey {
+): ViewKey() {
 
-    private val layout by lazy {
-        ChildLayout(title, bgColor, isColorRes)
-    }
-
-    override fun layout() = layout
+    override fun layout() = ChildLayout(title, bgColor, isColorRes)
 
     override fun viewChangeHandler() = FadeChangeHandler()
 

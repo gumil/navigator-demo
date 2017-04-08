@@ -3,13 +3,21 @@ package io.github.gumil.testnavigator.common
 import android.os.Parcelable
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
 
-internal interface ViewKey: Parcelable {
+internal abstract class ViewKey: Parcelable {
 
-    fun layout(): ViewLayout
+    val layout by lazy {
+        layout()
+    }
 
-    fun viewChangeHandler(): ViewChangeHandler
+    val viewChangeHandler by lazy {
+        viewChangeHandler()
+    }
 
-    fun onChangeStarted() {}
+    abstract protected fun layout(): ViewLayout
 
-    fun onChangeEnded() {}
+    abstract protected fun viewChangeHandler(): ViewChangeHandler
+
+    open fun onChangeStarted() {}
+
+    open fun onChangeEnded() {}
 }

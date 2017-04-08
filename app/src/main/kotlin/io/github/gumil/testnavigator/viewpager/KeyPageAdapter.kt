@@ -12,14 +12,14 @@ internal class KeyPageAdapter(
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val viewKey = data[position]
-        container.addView(viewKey.layout().inflate(container.context))
+        container.addView(viewKey.layout.inflate(container.context))
         return viewKey
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
         (`object` as? ChildKey)?.let {
             try {
-                container.removeView(it.layout().view)
+                container.removeView(it.layout.view)
             } catch (e: UninitializedPropertyAccessException) {
                 e.printStackTrace()
             }
@@ -29,8 +29,8 @@ internal class KeyPageAdapter(
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return (`object` as? ChildKey)?.let {
             try {
-                Log.d("tantrums", "${it.layout().view == view}")
-                it.layout().view == view
+                Log.d("tantrums", "${it.layout.view == view}")
+                it.layout.view == view
             } catch (e: UninitializedPropertyAccessException) {
                 false
             }
