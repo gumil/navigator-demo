@@ -11,6 +11,7 @@ import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.navigation.NavigationKey
 import io.github.gumil.testnavigator.sharedelement.CityGridKey
 import io.github.gumil.testnavigator.transition.TransitionKey
+import io.github.gumil.testnavigator.viewpager.PagerKey
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.recyclerview.v7.recyclerView
@@ -64,7 +65,7 @@ internal class HomeLayout : ViewLayout() {
 
                     }
                     HomeDemoModel.VIEW_PAGER -> {
-
+                        backstack.goTo(PagerKey())
                     }
                     HomeDemoModel.TARGET_CONTROLLER -> {
 
