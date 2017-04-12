@@ -9,7 +9,7 @@ import io.github.gumil.testnavigator.home.HomeDemoModel
 internal class CityGridKey(
         private val homeDemoModel: HomeDemoModel,
         private val position: Int
-): ViewKey() {
+) : ViewKey() {
     override fun layout() = CityGridLayout(homeDemoModel.title, homeDemoModel.color, position)
 
     override fun viewChangeHandler() = ArcFadeMoveChangeHandler()
@@ -19,19 +19,13 @@ internal class CityGridKey(
             parcel.readInt()
     )
 
-    @JvmField
-    val CREATOR: Parcelable.Creator<CityGridKey> = object : Parcelable.Creator<CityGridKey> {
-        override fun createFromParcel(`in`: Parcel): CityGridKey {
-            return CityGridKey(`in`)
-        }
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<CityGridKey> = object : Parcelable.Creator<CityGridKey> {
+            override fun createFromParcel(`in`: Parcel) = CityGridKey(`in`)
 
-        override fun newArray(size: Int): Array<CityGridKey?> {
-            return arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<CityGridKey>(size)
         }
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

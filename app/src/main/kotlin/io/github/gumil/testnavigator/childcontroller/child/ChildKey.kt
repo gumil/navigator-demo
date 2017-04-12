@@ -21,19 +21,13 @@ internal class ChildKey(
             parcel.readInt() == 1
     )
 
-    @JvmField
-    val CREATOR: Parcelable.Creator<ChildKey> = object : Parcelable.Creator<ChildKey> {
-        override fun createFromParcel(`in`: Parcel): ChildKey {
-            return ChildKey(`in`)
-        }
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<ChildKey> = object : Parcelable.Creator<ChildKey> {
+            override fun createFromParcel(`in`: Parcel) =  ChildKey(`in`)
 
-        override fun newArray(size: Int): Array<ChildKey?> {
-            return arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<ChildKey>(size)
         }
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

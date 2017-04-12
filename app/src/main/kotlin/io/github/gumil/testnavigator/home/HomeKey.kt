@@ -2,7 +2,6 @@ package io.github.gumil.testnavigator.home
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import com.zhuinden.simplestack.navigator.changehandlers.NoOpViewChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
@@ -12,25 +11,17 @@ internal data class HomeKey(
 
     override fun layout() = HomeLayout()
 
-    override fun viewChangeHandler(): ViewChangeHandler {
-        return NoOpViewChangeHandler()
-    }
+    override fun viewChangeHandler() = NoOpViewChangeHandler()
 
-    constructor(parcel: Parcel): this()
+    constructor(parcel: Parcel) : this()
 
-    @JvmField
-    val CREATOR: Parcelable.Creator<HomeKey> = object : Parcelable.Creator<HomeKey> {
-        override fun createFromParcel(`in`: Parcel): HomeKey {
-            return HomeKey(`in`)
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<HomeKey> = object : Parcelable.Creator<HomeKey> {
+            override fun createFromParcel(`in`: Parcel) =  HomeKey(`in`)
+
+            override fun newArray(size: Int) = arrayOfNulls<HomeKey>(size)
         }
-
-        override fun newArray(size: Int): Array<HomeKey?> {
-            return arrayOfNulls(size)
-        }
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {}

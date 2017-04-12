@@ -5,7 +5,6 @@ import android.os.Parcelable
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
-import io.github.gumil.testnavigator.common.ViewLayout
 
 internal data class NavigationKey(
         private val index: Int = 0,
@@ -23,19 +22,13 @@ internal data class NavigationKey(
             DisplayUpMode.values()[parcel.readInt()]
     )
 
-    @JvmField
-    val CREATOR: Parcelable.Creator<NavigationKey> = object : Parcelable.Creator<NavigationKey> {
-        override fun createFromParcel(`in`: Parcel): NavigationKey {
-            return NavigationKey(`in`)
-        }
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<NavigationKey> = object : Parcelable.Creator<NavigationKey> {
+            override fun createFromParcel(`in`: Parcel) = NavigationKey(`in`)
 
-        override fun newArray(size: Int): Array<NavigationKey?> {
-            return arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<NavigationKey>(size)
         }
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

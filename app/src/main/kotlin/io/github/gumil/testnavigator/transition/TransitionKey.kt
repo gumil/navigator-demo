@@ -13,7 +13,7 @@ internal data class TransitionKey(
     private var changeHandler: ViewChangeHandler = VerticalChangeHandler()
 
     constructor(transitionDemo: TransitionDemo,
-                changeHandler: ViewChangeHandler): this(transitionDemo) {
+                changeHandler: ViewChangeHandler) : this(transitionDemo) {
         this.changeHandler = changeHandler
     }
 
@@ -28,19 +28,14 @@ internal data class TransitionKey(
             TransitionDemo.fromIndex(parcel.readInt())
     )
 
-    @JvmField
-    val CREATOR: Parcelable.Creator<TransitionKey> = object : Parcelable.Creator<TransitionKey> {
-        override fun createFromParcel(`in`: Parcel): TransitionKey {
-            return TransitionKey(`in`)
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<TransitionKey> = object : Parcelable.Creator<TransitionKey> {
+            override fun createFromParcel(`in`: Parcel) = TransitionKey(`in`)
+
+            override fun newArray(size: Int) = arrayOfNulls<TransitionKey>(size)
         }
 
-        override fun newArray(size: Int): Array<TransitionKey?> {
-            return arrayOfNulls(size)
-        }
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {

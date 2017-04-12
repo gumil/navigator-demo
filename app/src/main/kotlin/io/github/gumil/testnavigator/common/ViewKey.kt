@@ -3,7 +3,7 @@ package io.github.gumil.testnavigator.common
 import android.os.Parcelable
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
 
-internal abstract class ViewKey: Parcelable {
+internal abstract class ViewKey : Parcelable {
 
     val layout by lazy {
         layout()
@@ -20,4 +20,6 @@ internal abstract class ViewKey: Parcelable {
     open fun onChangeStarted() {}
 
     open fun onChangeEnded() {}
+
+    override fun describeContents() = hashCode()
 }

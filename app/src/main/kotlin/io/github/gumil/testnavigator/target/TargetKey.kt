@@ -13,18 +13,14 @@ internal class TargetKey() : ViewKey() {
 
     constructor(parcel: Parcel) : this()
 
-    @JvmField
-    val CREATOR: Parcelable.Creator<TargetKey> = object : Parcelable.Creator<TargetKey> {
-        override fun createFromParcel(`in`: Parcel): TargetKey {
-            return TargetKey(`in`)
-        }
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<TargetKey> = object : Parcelable.Creator<TargetKey> {
+            override fun createFromParcel(`in`: Parcel) = TargetKey(`in`)
 
-        override fun newArray(size: Int): Array<TargetKey?> {
-            return arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<TargetKey>(size)
         }
     }
-
-    override fun describeContents(): Int = hashCode()
 
     override fun writeToParcel(dest: Parcel, flags: Int) { }
 }

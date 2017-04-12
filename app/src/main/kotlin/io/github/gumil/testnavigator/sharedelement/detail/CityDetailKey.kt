@@ -10,7 +10,7 @@ internal class CityDetailKey(
         @DrawableRes private val imageDrawableRes: Int,
         private val title: String,
         private val names: MutableList<String>
-): ViewKey() {
+) : ViewKey() {
 
     override fun layout() = CityDetailLayout(imageDrawableRes, title)
 
@@ -24,19 +24,13 @@ internal class CityDetailKey(
             }
     )
 
-    @JvmField
-    val CREATOR: Parcelable.Creator<CityDetailKey> = object : Parcelable.Creator<CityDetailKey> {
-        override fun createFromParcel(`in`: Parcel): CityDetailKey {
-            return CityDetailKey(`in`)
-        }
+    companion object {
+        @JvmField
+        val CREATOR: Parcelable.Creator<CityDetailKey> = object : Parcelable.Creator<CityDetailKey> {
+            override fun createFromParcel(`in`: Parcel) = CityDetailKey(`in`)
 
-        override fun newArray(size: Int): Array<CityDetailKey?> {
-            return arrayOfNulls(size)
+            override fun newArray(size: Int) = arrayOfNulls<CityDetailKey>(size)
         }
-    }
-
-    override fun describeContents(): Int {
-        return 0
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
