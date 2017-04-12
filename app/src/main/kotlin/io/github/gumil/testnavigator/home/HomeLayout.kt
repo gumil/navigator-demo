@@ -10,6 +10,7 @@ import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.navigation.NavigationKey
 import io.github.gumil.testnavigator.sharedelement.CityGridKey
+import io.github.gumil.testnavigator.target.TargetKey
 import io.github.gumil.testnavigator.transition.TransitionKey
 import io.github.gumil.testnavigator.viewpager.PagerKey
 import org.jetbrains.anko.*
@@ -52,24 +53,14 @@ internal class HomeLayout : ViewLayout() {
             return { homeDemoModel, position ->
                 val backstack = Navigator.getBackstack(view.context)
                 when (homeDemoModel) {
-                    HomeDemoModel.NAVIGATION -> {
-                        backstack.goTo(NavigationKey())
-                    }
-                    HomeDemoModel.TRANSITIONS -> {
-                        backstack.goTo(TransitionKey())
-                    }
-                    HomeDemoModel.SHARED_ELEMENT_TRANSITIONS -> {
-                        backstack.goTo(CityGridKey(homeDemoModel, position))
-                    }
+                    HomeDemoModel.NAVIGATION -> backstack.goTo(NavigationKey())
+                    HomeDemoModel.TRANSITIONS -> backstack.goTo(TransitionKey())
+                    HomeDemoModel.SHARED_ELEMENT_TRANSITIONS -> backstack.goTo(CityGridKey(homeDemoModel, position))
                     HomeDemoModel.CHILD_CONTROLLERS -> {
 
                     }
-                    HomeDemoModel.VIEW_PAGER -> {
-                        backstack.goTo(PagerKey())
-                    }
-                    HomeDemoModel.TARGET_CONTROLLER -> {
-
-                    }
+                    HomeDemoModel.VIEW_PAGER -> backstack.goTo(PagerKey())
+                    HomeDemoModel.TARGET_CONTROLLER -> backstack.goTo(TargetKey())
                     HomeDemoModel.MULTIPLE_CHILD_ROUTERS -> {
 
                     }

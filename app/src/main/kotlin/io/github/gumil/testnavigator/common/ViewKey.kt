@@ -1,5 +1,6 @@
 package io.github.gumil.testnavigator.common
 
+import android.content.Intent
 import android.os.Parcelable
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
 
@@ -22,4 +23,6 @@ internal abstract class ViewKey : Parcelable {
     open fun onChangeEnded() {}
 
     override fun describeContents() = hashCode()
+
+    open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {}
 }
