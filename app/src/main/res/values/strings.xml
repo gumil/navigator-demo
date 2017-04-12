@@ -10,6 +10,12 @@
     <string name="next_controller">Next Controller</string>
     <string name="navigation_title">Controller #%1$d</string>
 
+    <!-- Target Demo -->
+    <string name="pick_title">Pick Title (From another Controller)</string>
+    <string name="pick_image">Pick Image (From Gallery)</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="use_title">Use Title</string>
+
     <!-- Transitions -->
     <string name="fab_dialog_transition_name">transition.fab</string>
     <string name="transition_tag_dot">transition.dot</string>

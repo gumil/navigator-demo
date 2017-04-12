@@ -3,4 +3,7 @@
     <dimen name="touch_raise">6dp</dimen>
     <dimen name="padding_normal">16dp</dimen>
     <dimen name="z_fab">6dp</dimen>
+
+    <dimen name="display_target_image_size">200dp</dimen>
+    <dimen name="display_target_image_margin">24dp</dimen>
 </resources>
