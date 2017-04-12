@@ -2,18 +2,21 @@ package io.github.gumil.testnavigator.home
 
 import android.os.Parcel
 import android.os.Parcelable
+import android.support.v7.widget.RecyclerView
 import com.zhuinden.simplestack.navigator.changehandlers.NoOpViewChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class HomeKey(
-        private val tag: String = HomeKey::javaClass.name
+        private var state: Parcelable? = null
 ) : ViewKey() {
 
     override fun layout() = HomeLayout()
 
     override fun viewChangeHandler() = NoOpViewChangeHandler()
 
-    constructor(parcel: Parcel) : this()
+    constructor(parcel: Parcel) : this(
+            parcel.readParcelable<RecyclerView.SavedState>(RecyclerView.SavedState::class.java.classLoader)
+    )
 
     companion object {
         @JvmField
@@ -24,5 +27,22 @@ internal data class HomeKey(
         }
     }
 
-    override fun writeToParcel(dest: Parcel, flags: Int) {}
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.writeParcelable(state, flags)
+    }
+
+    override fun onViewRemoved() {
+        super.onViewRemoved()
+
+        (layout as? HomeLayout)?.let {
+            state = it.getLayoutManagerState()
+        }
+    }
+
+    override fun onChangeStarted() {
+        super.onChangeStarted()
+        (layout as? HomeLayout)?.let { home ->
+            state?.let { home.restoreLayoutManager(it) }
+        }
+    }
 }

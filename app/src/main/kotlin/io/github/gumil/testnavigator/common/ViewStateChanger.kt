@@ -59,6 +59,7 @@ internal class ViewStateChanger(
             val newView = newKey.layout.inflate(newContext)
             Navigator.restoreViewFromState(newView)
 
+            previousKey?.onViewRemoved()
             newKey.onChangeStarted()
             setAnimating(context, true)
             if (previousView == null) {

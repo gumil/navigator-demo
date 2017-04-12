@@ -1,7 +1,6 @@
 package io.github.gumil.testnavigator.viewpager
 
 import android.support.v4.view.PagerAdapter
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import io.github.gumil.testnavigator.childcontroller.child.ChildKey
@@ -29,7 +28,6 @@ internal class KeyPageAdapter(
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return (`object` as? ChildKey)?.let {
             try {
-                Log.d("tantrums", "${it.layout.view == view}")
                 it.layout.view == view
             } catch (e: UninitializedPropertyAccessException) {
                 false

@@ -18,7 +18,7 @@ import io.github.gumil.testnavigator.utils.getColorRes
 import org.jetbrains.anko.*
 
 internal class TargetLayout(
-        val onTitlePicked: (String) -> Unit = {}
+        private val onTitlePicked: (String) -> Unit = {}
 ) : ViewLayout() {
 
     private lateinit var textView: TextView

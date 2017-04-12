@@ -6,7 +6,7 @@ import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal class TargetTitleKey(
-        val onTitlePicked: (String) -> Unit = {}
+        private val onTitlePicked: (String) -> Unit = {}
 ) : ViewKey() {
 
     override fun layout() = TargetTitleLayout(onTitlePicked)

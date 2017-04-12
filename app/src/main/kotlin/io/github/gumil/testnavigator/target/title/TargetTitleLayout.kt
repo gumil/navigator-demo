@@ -8,7 +8,7 @@ import io.github.gumil.testnavigator.common.ViewLayout
 import org.jetbrains.anko.*
 
 internal class TargetTitleLayout(
-        val onTitlePicked: (String) -> Unit = {}
+        private val onTitlePicked: (String) -> Unit = {}
 ) : ViewLayout() {
 
     override fun createView(context: Context) = with(context) {

@@ -18,11 +18,25 @@ internal abstract class ViewKey : Parcelable {
 
     abstract protected fun viewChangeHandler(): ViewChangeHandler
 
+    /**
+     * Lifecycle: When animation is started. By this time view is already attached.
+     */
     open fun onChangeStarted() {}
 
+    /**
+     * Lifecycle: When animation is ended
+     */
     open fun onChangeEnded() {}
 
-    override fun describeContents() = hashCode()
+    /**
+     * Lifecycle: When view is removed
+     */
+    open fun onViewRemoved() {}
 
+    /**
+     * Lifecycle: Called from host activity, handling for activityResults
+     */
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {}
+
+    override fun describeContents() = hashCode()
 }
