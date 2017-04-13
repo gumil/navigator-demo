@@ -23,6 +23,7 @@ internal class MasterLayout : ViewLayout() {
     private lateinit var recyclerView: RecyclerView
 
     override fun createView(context: Context) = with(context) {
+        toolbarTitle = "Master/Detail Flow"
         if (isOrientation(Configuration.ORIENTATION_PORTRAIT))
             getPortraitLayout() else getLandscapeLayout()
     }
