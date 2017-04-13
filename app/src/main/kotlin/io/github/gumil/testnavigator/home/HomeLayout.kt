@@ -69,8 +69,8 @@ internal class HomeLayout : ViewLayout() {
                 HomeDemoModel.MULTIPLE_CHILD_ROUTERS -> { }
                 HomeDemoModel.MASTER_DETAIL -> backstack.goTo(MasterKey())
                 HomeDemoModel.DRAG_DISMISS ->  backstack.goTo(DragDismissKey())
-                HomeDemoModel.RX_LIFECYCLE -> { }
-                HomeDemoModel.RX_LIFECYCLE_2 -> { }
+//                HomeDemoModel.RX_LIFECYCLE -> { }
+//                HomeDemoModel.RX_LIFECYCLE_2 -> { }
             }
         }
     }
