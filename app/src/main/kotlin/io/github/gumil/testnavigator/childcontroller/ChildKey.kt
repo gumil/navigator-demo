@@ -1,7 +1,8 @@
-package io.github.gumil.testnavigator.childcontroller.child
+package io.github.gumil.testnavigator.childcontroller
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
@@ -11,9 +12,11 @@ internal class ChildKey(
         private val isColorRes: Boolean
 ): ViewKey() {
 
+    var changeHandler: ViewChangeHandler = FadeChangeHandler()
+
     override fun layout() = ChildLayout(title, bgColor, isColorRes)
 
-    override fun viewChangeHandler() = FadeChangeHandler()
+    override fun viewChangeHandler() = changeHandler
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),

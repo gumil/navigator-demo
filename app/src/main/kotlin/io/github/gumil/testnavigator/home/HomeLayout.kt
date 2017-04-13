@@ -10,6 +10,7 @@ import android.widget.ImageView
 import com.zhuinden.simplestack.navigator.Navigator
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.common.ViewLayout
+import io.github.gumil.testnavigator.master.MasterKey
 import io.github.gumil.testnavigator.navigation.NavigationKey
 import io.github.gumil.testnavigator.sharedelement.CityGridKey
 import io.github.gumil.testnavigator.target.TargetKey
@@ -61,17 +62,11 @@ internal class HomeLayout : ViewLayout() {
                 HomeDemoModel.NAVIGATION -> backstack.goTo(NavigationKey())
                 HomeDemoModel.TRANSITIONS -> backstack.goTo(TransitionKey())
                 HomeDemoModel.SHARED_ELEMENT_TRANSITIONS -> backstack.goTo(CityGridKey(homeDemoModel, position))
-                HomeDemoModel.CHILD_CONTROLLERS -> {
-
-                }
+                HomeDemoModel.CHILD_CONTROLLERS -> { }
                 HomeDemoModel.VIEW_PAGER -> backstack.goTo(PagerKey())
                 HomeDemoModel.TARGET_CONTROLLER -> backstack.goTo(TargetKey())
-                HomeDemoModel.MULTIPLE_CHILD_ROUTERS -> {
-
-                }
-                HomeDemoModel.MASTER_DETAIL -> {
-
-                }
+                HomeDemoModel.MULTIPLE_CHILD_ROUTERS -> { }
+                HomeDemoModel.MASTER_DETAIL -> backstack.goTo(MasterKey())
                 HomeDemoModel.DRAG_DISMISS -> {
 
                 }

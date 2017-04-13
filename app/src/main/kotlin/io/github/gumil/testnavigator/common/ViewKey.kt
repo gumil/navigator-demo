@@ -10,13 +10,9 @@ internal abstract class ViewKey : Parcelable {
         layout()
     }
 
-    val viewChangeHandler by lazy {
-        viewChangeHandler()
-    }
-
     abstract protected fun layout(): ViewLayout
 
-    abstract protected fun viewChangeHandler(): ViewChangeHandler
+    abstract fun viewChangeHandler(): ViewChangeHandler
 
     /**
      * Lifecycle: When animation is started. By this time view is already attached.

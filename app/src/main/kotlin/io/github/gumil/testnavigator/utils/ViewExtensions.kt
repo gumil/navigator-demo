@@ -3,6 +3,7 @@ package io.github.gumil.testnavigator.utils
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.res.Configuration
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -82,3 +83,5 @@ internal fun TextView.textAppearance(@StyleRes style: Int) {
         setTextAppearance(context, style)
     }
 }
+
+internal fun Context.isOrientation(orientation: Int) = resources.configuration.orientation == orientation

@@ -17,6 +17,9 @@
     <string name="use_title">Use Title</string>
     <string name="default_text">Press pick title to set this title, or pick image to fill in the image view.</string>
 
+    <!-- Master/Detail Demo -->
+    <string name="rotate_for_two_pane">Rotate your device for a two pane view.</string>
+
     <!-- Transitions -->
     <string name="fab_dialog_transition_name">transition.fab</string>
     <string name="transition_tag_dot">transition.dot</string>

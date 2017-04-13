@@ -70,9 +70,9 @@ internal class ViewStateChanger(
             } else {
                 val viewChangeHandler: ViewChangeHandler
                 if (stateChange.direction == StateChange.FORWARD) {
-                    viewChangeHandler = newKey.viewChangeHandler
+                    viewChangeHandler = newKey.viewChangeHandler()
                 } else if (previousKey != null && stateChange.direction == StateChange.BACKWARD) {
-                    viewChangeHandler = previousKey.viewChangeHandler
+                    viewChangeHandler = previousKey.viewChangeHandler()
                 } else {
                     viewChangeHandler = NoOpViewChangeHandler()
                 }
