@@ -7,16 +7,18 @@ import com.zhuinden.simplestack.navigator.changehandlers.NoOpViewChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class HomeKey(
-        private var state: Parcelable? = null
+        private val TAG: String = HomeKey::javaClass.name
 ) : ViewKey() {
+
+    private var state: Parcelable? = null
 
     override fun layout() = HomeLayout()
 
     override fun viewChangeHandler() = NoOpViewChangeHandler()
 
-    constructor(parcel: Parcel) : this(
-            parcel.readParcelable<RecyclerView.SavedState>(RecyclerView.SavedState::class.java.classLoader)
-    )
+    constructor(parcel: Parcel) : this() {
+        parcel.readParcelable<RecyclerView.SavedState>(RecyclerView.SavedState::class.java.classLoader)
+    }
 
     companion object {
         @JvmField
