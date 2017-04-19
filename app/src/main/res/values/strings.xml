@@ -23,6 +23,10 @@
     <!-- Drag Dismiss Demo -->
     <string name="drag_to_dismiss">Elastic scrolling view - scroll past bounds to dismiss.</string>
 
+    <!-- Parent Controller Demo -->
+    <string name="parent_controller">Parent Controller</string>
+    <string name="go_to_next_parent">Go to next parent</string>
+
     <!-- Transitions -->
     <string name="fab_dialog_transition_name">transition.fab</string>
     <string name="transition_tag_dot">transition.dot</string>

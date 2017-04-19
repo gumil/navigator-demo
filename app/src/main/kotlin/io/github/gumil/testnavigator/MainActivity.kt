@@ -5,22 +5,30 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import com.zhuinden.simplestack.HistoryBuilder
+import com.zhuinden.simplestack.StateChanger
 import com.zhuinden.simplestack.navigator.Navigator
+import io.github.gumil.testnavigator.common.ParentChildStateChanger
 import io.github.gumil.testnavigator.common.ViewKey
-import io.github.gumil.testnavigator.common.ViewStateChanger
 import io.github.gumil.testnavigator.home.HomeKey
 import org.jetbrains.anko.frameLayout
 
 internal class MainActivity : AppCompatActivity() {
 
     var isAnimating = false
+    lateinit var stateChanger: ParentChildStateChanger
+
+    companion object {
+        var instance: MainActivity? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        instance = this
         super.onCreate(savedInstanceState)
         val root = frameLayout {  }
 
+        stateChanger = ParentChildStateChanger(this, root)
         Navigator.configure()
-                .setStateChanger(ViewStateChanger(this, root))
+                .setStateChanger(stateChanger)
                 .install(this, root, HistoryBuilder.single(HomeKey()))
     }
 
@@ -38,5 +46,13 @@ internal class MainActivity : AppCompatActivity() {
         Navigator.getBackstack(this)
                 .top<ViewKey>()
                 .onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun setChildStateChanger(stateChanger: StateChanger) {
+        this.stateChanger.childStateChanger = stateChanger
+    }
+
+    fun removeChildStateChanger() {
+        stateChanger.childStateChanger = null
     }
 }

@@ -1,4 +1,4 @@
-package io.github.gumil.testnavigator.childcontroller
+package io.github.gumil.testnavigator.child
 
 import android.content.Context
 import android.view.Gravity

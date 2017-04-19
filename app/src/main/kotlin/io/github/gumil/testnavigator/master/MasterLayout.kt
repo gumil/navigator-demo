@@ -9,8 +9,8 @@ import android.widget.LinearLayout
 import com.zhuinden.simplestack.navigator.Navigator
 import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.R
-import io.github.gumil.testnavigator.childcontroller.ChildKey
-import io.github.gumil.testnavigator.childcontroller.ChildLayout
+import io.github.gumil.testnavigator.child.ChildKey
+import io.github.gumil.testnavigator.child.ChildLayout
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.utils.getColorRes
 import io.github.gumil.testnavigator.utils.isOrientation

@@ -1,4 +1,4 @@
-package io.github.gumil.testnavigator.childcontroller
+package io.github.gumil.testnavigator.child
 
 import android.os.Parcel
 import android.os.Parcelable
@@ -6,7 +6,7 @@ import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
-internal class ChildKey(
+internal data class ChildKey(
         private val title: String,
         private val bgColor: Int,
         private val isColorRes: Boolean

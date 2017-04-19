@@ -3,7 +3,7 @@ package io.github.gumil.testnavigator.viewpager
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
-import io.github.gumil.testnavigator.childcontroller.ChildKey
+import io.github.gumil.testnavigator.child.ChildKey
 
 internal class KeyPageAdapter(
         private val data: List<ChildKey>

@@ -2,7 +2,7 @@ package io.github.gumil.testnavigator.viewpager
 
 import android.content.Context
 import io.github.gumil.testnavigator.R
-import io.github.gumil.testnavigator.childcontroller.ChildKey
+import io.github.gumil.testnavigator.child.ChildKey
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.utils.getColorRes
 import org.jetbrains.anko.*
