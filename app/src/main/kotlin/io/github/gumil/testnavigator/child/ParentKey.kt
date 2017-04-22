@@ -29,13 +29,9 @@ internal data class ParentKey(
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<ParentKey> = object : Parcelable.Creator<ParentKey> {
-            override fun createFromParcel(`in`: Parcel): ParentKey {
-                return ParentKey(`in`)
-            }
+            override fun createFromParcel(`in`: Parcel) = ParentKey(`in`)
 
-            override fun newArray(size: Int): Array<ParentKey?> {
-                return arrayOfNulls(size)
-            }
+            override fun newArray(size: Int) = arrayOfNulls<ParentKey>(size)
         }
     }
 
