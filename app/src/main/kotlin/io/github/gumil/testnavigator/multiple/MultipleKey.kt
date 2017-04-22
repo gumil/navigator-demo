@@ -4,12 +4,9 @@ import android.os.Parcel
 import android.os.Parcelable
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
-import io.github.gumil.testnavigator.common.ViewLayout
 
 internal class MultipleKey(): ViewKey() {
-    override fun layout(): ViewLayout {
-        throw UnsupportedOperationException("not implemented")
-    }
+    override fun layout() = MultipleLayout()
 
     override fun viewChangeHandler() = FadeChangeHandler()
 
