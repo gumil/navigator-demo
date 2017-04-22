@@ -8,7 +8,8 @@ import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class NavigationKey(
         private val index: Int = 0,
-        private val displayUpMode: DisplayUpMode = DisplayUpMode.SHOW_FOR_CHILDREN_ONLY
+        private val displayUpMode: DisplayUpMode = DisplayUpMode.SHOW_FOR_CHILDREN_ONLY,
+        private val tag: String = ""
 ) : ViewKey() {
 
     var changeHandler: ViewChangeHandler = FadeChangeHandler()

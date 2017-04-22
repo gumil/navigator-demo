@@ -33,23 +33,31 @@ internal class ChildStateChanger(
         }
 
         val previousView = container.getChildAt(0)
-        val viewChangeHandler = if (stateChange.direction == StateChange.FORWARD) {
-            newKey.viewChangeHandler()
-        } else if (previousKey != null && stateChange.direction == StateChange.BACKWARD) {
-            previousKey.viewChangeHandler()
-        } else {
-            NoOpViewChangeHandler()
-        }
 
-        viewChangeHandler.performViewChange(
-                container,
-                previousView,
-                newView,
-                stateChange.direction
-        ) {
+        if (previousView == null) {
+            container.addView(newView)
             onChangeCompleted(stateChange.direction)
             completionCallback.stateChangeComplete()
             newKey.onChangeEnded()
+        } else {
+            val viewChangeHandler = if (stateChange.direction == StateChange.FORWARD) {
+                newKey.viewChangeHandler()
+            } else if (previousKey != null && stateChange.direction == StateChange.BACKWARD) {
+                previousKey.viewChangeHandler()
+            } else {
+                NoOpViewChangeHandler()
+            }
+
+            viewChangeHandler.performViewChange(
+                    container,
+                    previousView,
+                    newView,
+                    stateChange.direction
+            ) {
+                onChangeCompleted(stateChange.direction)
+                completionCallback.stateChangeComplete()
+                newKey.onChangeEnded()
+            }
         }
     }
 

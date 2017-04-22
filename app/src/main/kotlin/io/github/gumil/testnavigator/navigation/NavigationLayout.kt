@@ -24,6 +24,8 @@ internal class NavigationLayout(
     private lateinit var nextButton: Button
     private lateinit var upButton: Button
 
+    var navigationRoutes = NavigationRoutes()
+
     override fun createView(context: Context) = with(context) {
         toolbarTitle = HomeDemoModel.NAVIGATION.title
         verticalLayout {
@@ -45,6 +47,7 @@ internal class NavigationLayout(
 
                     onClick {
                         Navigator.getBackstack(ctx).goTo(HomeKey())
+                        navigationRoutes.onPop(ctx)
                     }
                 }.lparams(0, matchParent) {
                     weight = 1f
@@ -55,9 +58,7 @@ internal class NavigationLayout(
                     visibility = if (displayUpMode != DisplayUpMode.SHOW) View.GONE else View.VISIBLE
 
                     onClick {
-                        Navigator.getBackstack(ctx).goTo(NavigationKey().apply {
-                            changeHandler = SegueViewChangeHandler()
-                        })
+                        navigationRoutes.onUp(ctx)
                     }
                 }.lparams(0, matchParent) {
                     weight = 1f
@@ -67,11 +68,7 @@ internal class NavigationLayout(
                     text = getString(R.string.next_controller)
 
                     onClick {
-                        Navigator.getBackstack(ctx).goTo(NavigationKey(
-                                index + 1, displayUpMode.displayUpModeForChild
-                        ).apply {
-                            changeHandler = SegueViewChangeHandler()
-                        })
+                        navigationRoutes.onNext(ctx, index + 1, displayUpMode.displayUpModeForChild)
                     }
                 }.lparams(0, matchParent) {
                     weight = 1f

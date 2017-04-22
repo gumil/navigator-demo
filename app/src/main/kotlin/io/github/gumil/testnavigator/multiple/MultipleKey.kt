@@ -6,6 +6,7 @@ import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal class MultipleKey(): ViewKey() {
+
     override fun layout() = MultipleLayout()
 
     override fun viewChangeHandler() = FadeChangeHandler()
@@ -23,4 +24,7 @@ internal class MultipleKey(): ViewKey() {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {}
 
+    override fun onChangeEnded() {
+        super.onChangeEnded()
+    }
 }
