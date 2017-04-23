@@ -5,6 +5,7 @@ import android.os.Parcelable
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
+import io.github.gumil.testnavigator.multiple.StateChangerStack
 
 internal data class NavigationKey(
         private val index: Int = 0,
@@ -43,5 +44,14 @@ internal data class NavigationKey(
 
     override fun onChangeEnded() {
         (layout as? NavigationLayout)?.setButtonsEnabled(true)
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (StateChangerStack.isEmpty()) {
+            return false
+        }
+
+        (layout as? NavigationLayout)?.onBackPressed()
+        return true
     }
 }

@@ -20,9 +20,10 @@ internal class MultipleLayout : ViewLayout() {
                 frameLayout {
                     addView(NavigationLayout().apply {
                         navigationRoutes.isFullScreen = false
-                        container = this@frameLayout
+                        container = this@frameLayout.apply {
+                            tag = "NAVIGATION TAG $i"
+                        }
                     }.inflate(ctx))
-                    tag = "NAVIGATION TAG $i"
                 }.lparams(matchParent, 0) {
                     weight = 1f
                 }.let { children.add(it) }

@@ -29,6 +29,8 @@ internal abstract class ViewKey : Parcelable {
      */
     open fun onViewRemoved() {}
 
+    open fun onBackPressed() = false
+
     /**
      * Lifecycle: Called from host activity, handling for activityResults
      */

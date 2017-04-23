@@ -23,8 +23,4 @@ internal class MultipleKey(): ViewKey() {
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {}
-
-    override fun onChangeEnded() {
-        super.onChangeEnded()
-    }
 }

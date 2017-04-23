@@ -33,8 +33,12 @@ internal class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(!Navigator.onBackPressed(this)) {
-            super.onBackPressed()
+        if (!Navigator.getBackstack(this)
+                .top<ViewKey>()
+                .onBackPressed()) {
+            if (!Navigator.onBackPressed(this)) {
+                super.onBackPressed()
+            }
         }
     }
 

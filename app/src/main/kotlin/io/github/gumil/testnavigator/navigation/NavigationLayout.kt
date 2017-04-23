@@ -30,7 +30,9 @@ internal class NavigationLayout(
     var container: ViewGroup? = null
 
     override fun createView(context: Context) = with(context) {
-        toolbarTitle = HomeDemoModel.NAVIGATION.title
+        if (navigationRoutes.isFullScreen) {
+            toolbarTitle = HomeDemoModel.NAVIGATION.title
+        }
         verticalLayout {
             backgroundColor = getMaterialColor(index)
 
@@ -70,9 +72,9 @@ internal class NavigationLayout(
                     text = getString(R.string.next_controller)
 
                     onClick {
-                        val displayUpModeForChild = DisplayUpMode.HIDE
+                        var displayUpModeForChild = DisplayUpMode.HIDE
                         if (navigationRoutes.isFullScreen) {
-                            displayUpMode.displayUpModeForChild
+                            displayUpModeForChild = displayUpMode.displayUpModeForChild
                         }
                         navigationRoutes.onNext(ctx, index + 1,
                                 displayUpModeForChild, container)
@@ -91,5 +93,11 @@ internal class NavigationLayout(
         nextButton.isEnabled = enabled
         popButton.isEnabled = enabled
         upButton.isEnabled = enabled
+    }
+
+    fun onBackPressed() {
+        container?.let {
+            navigationRoutes.onBack(view.context, it)
+        }
     }
 }
