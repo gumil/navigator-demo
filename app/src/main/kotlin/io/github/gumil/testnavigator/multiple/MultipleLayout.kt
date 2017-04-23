@@ -14,10 +14,15 @@ internal class MultipleLayout : ViewLayout() {
     val children = mutableListOf<ViewGroup>()
 
     override fun createView(context: Context) = with(context) {
+        toolbarTitle = "Child Router Demo"
         verticalLayout {
             for (i in 0..2) {
                 frameLayout {
-                    addView(NavigationLayout().inflate(ctx))
+                    addView(NavigationLayout().apply {
+                        navigationRoutes.isFullScreen = false
+                        container = this@frameLayout
+                    }.inflate(ctx))
+                    tag = "NAVIGATION TAG $i"
                 }.lparams(matchParent, 0) {
                     weight = 1f
                 }.let { children.add(it) }

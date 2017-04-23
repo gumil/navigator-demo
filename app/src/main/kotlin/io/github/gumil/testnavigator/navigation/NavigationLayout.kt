@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import com.zhuinden.simplestack.navigator.Navigator
 import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
@@ -26,6 +27,8 @@ internal class NavigationLayout(
 
     var navigationRoutes = NavigationRoutes()
 
+    var container: ViewGroup? = null
+
     override fun createView(context: Context) = with(context) {
         toolbarTitle = HomeDemoModel.NAVIGATION.title
         verticalLayout {
@@ -46,7 +49,6 @@ internal class NavigationLayout(
                     text = getString(R.string.pop_to_root)
 
                     onClick {
-                        Navigator.getBackstack(ctx).goTo(HomeKey())
                         navigationRoutes.onPop(ctx)
                     }
                 }.lparams(0, matchParent) {
@@ -68,7 +70,12 @@ internal class NavigationLayout(
                     text = getString(R.string.next_controller)
 
                     onClick {
-                        navigationRoutes.onNext(ctx, index + 1, displayUpMode.displayUpModeForChild)
+                        val displayUpModeForChild = DisplayUpMode.HIDE
+                        if (navigationRoutes.isFullScreen) {
+                            displayUpMode.displayUpModeForChild
+                        }
+                        navigationRoutes.onNext(ctx, index + 1,
+                                displayUpModeForChild, container)
                     }
                 }.lparams(0, matchParent) {
                     weight = 1f
