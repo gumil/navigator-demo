@@ -13,7 +13,6 @@ import io.github.gumil.testnavigator.child.ParentKey
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.dragdismiss.DragDismissKey
 import io.github.gumil.testnavigator.master.MasterKey
-import io.github.gumil.testnavigator.multiple.MultipleKey
 import io.github.gumil.testnavigator.navigation.NavigationKey
 import io.github.gumil.testnavigator.sharedelement.CityGridKey
 import io.github.gumil.testnavigator.target.TargetKey
@@ -68,7 +67,7 @@ internal class HomeLayout : ViewLayout() {
                 HomeDemoModel.CHILD_CONTROLLERS -> backstack.goTo(ParentKey())
                 HomeDemoModel.VIEW_PAGER -> backstack.goTo(PagerKey())
                 HomeDemoModel.TARGET_CONTROLLER -> backstack.goTo(TargetKey())
-                HomeDemoModel.MULTIPLE_CHILD_ROUTERS -> backstack.goTo(MultipleKey())
+//                HomeDemoModel.MULTIPLE_CHILD_ROUTERS -> backstack.goTo(MultipleKey())
                 HomeDemoModel.MASTER_DETAIL -> backstack.goTo(MasterKey())
                 HomeDemoModel.DRAG_DISMISS ->  backstack.goTo(DragDismissKey())
 //                HomeDemoModel.RX_LIFECYCLE -> { }

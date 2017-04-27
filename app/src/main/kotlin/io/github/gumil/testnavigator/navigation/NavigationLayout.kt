@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import com.zhuinden.simplestack.navigator.Navigator
 import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
@@ -25,14 +24,8 @@ internal class NavigationLayout(
     private lateinit var nextButton: Button
     private lateinit var upButton: Button
 
-    var navigationRoutes = NavigationRoutes()
-
-    var container: ViewGroup? = null
-
     override fun createView(context: Context) = with(context) {
-        if (navigationRoutes.isFullScreen) {
-            toolbarTitle = HomeDemoModel.NAVIGATION.title
-        }
+        toolbarTitle = HomeDemoModel.NAVIGATION.title
         verticalLayout {
             backgroundColor = getMaterialColor(index)
 
@@ -51,7 +44,7 @@ internal class NavigationLayout(
                     text = getString(R.string.pop_to_root)
 
                     onClick {
-                        navigationRoutes.onPop(ctx)
+                        Navigator.getBackstack(ctx).goTo(HomeKey())
                     }
                 }.lparams(0, matchParent) {
                     weight = 1f
@@ -62,7 +55,9 @@ internal class NavigationLayout(
                     visibility = if (displayUpMode != DisplayUpMode.SHOW) View.GONE else View.VISIBLE
 
                     onClick {
-                        navigationRoutes.onUp(ctx)
+                        Navigator.getBackstack(ctx).goTo(NavigationKey().apply {
+                            changeHandler = SegueViewChangeHandler()
+                        })
                     }
                 }.lparams(0, matchParent) {
                     weight = 1f
@@ -72,12 +67,11 @@ internal class NavigationLayout(
                     text = getString(R.string.next_controller)
 
                     onClick {
-                        var displayUpModeForChild = DisplayUpMode.HIDE
-                        if (navigationRoutes.isFullScreen) {
-                            displayUpModeForChild = displayUpMode.displayUpModeForChild
-                        }
-                        navigationRoutes.onNext(ctx, index + 1,
-                                displayUpModeForChild, container)
+                        Navigator.getBackstack(ctx).goTo(NavigationKey(
+                                index + 1, displayUpMode.displayUpModeForChild
+                        ).apply {
+                            changeHandler = SegueViewChangeHandler()
+                        })
                     }
                 }.lparams(0, matchParent) {
                     weight = 1f
@@ -93,11 +87,5 @@ internal class NavigationLayout(
         nextButton.isEnabled = enabled
         popButton.isEnabled = enabled
         upButton.isEnabled = enabled
-    }
-
-    fun onBackPressed() {
-        container?.let {
-            navigationRoutes.onBack(view.context, it)
-        }
     }
 }
