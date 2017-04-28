@@ -26,6 +26,7 @@ internal class DialogLayout(
             view {
                 id = DIALOG_BACKGROUND_ID
                 backgroundColor = getColorRes(R.color.immersive_background)
+                isClickable = true
             }.lparams(matchParent, matchParent)
 
             verticalLayout {
