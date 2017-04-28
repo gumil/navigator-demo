@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.MotionEvent
 import com.zhuinden.simplestack.HistoryBuilder
@@ -65,12 +64,15 @@ internal class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menu.clear()
-        val menuRes = Navigator.getBackstack(this)
-                .top<ViewKey>()
-                .onCreateOptionsMenu()
-        if (menuRes != -1) {
-            menuInflater.inflate(menuRes, menu)
+        if (!isAnimating) {
+            val menuRes = Navigator.getBackstack(this)
+                    .top<ViewKey>()
+                    .onCreateOptionsMenu()
+            if (menuRes != -1) {
+                menuInflater.inflate(menuRes, menu)
+            }
         }
+
         return super.onCreateOptionsMenu(menu)
     }
 

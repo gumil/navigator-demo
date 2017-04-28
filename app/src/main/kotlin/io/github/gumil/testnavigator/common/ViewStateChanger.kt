@@ -63,6 +63,7 @@ internal class ViewStateChanger(
 
             previousKey?.onViewRemoved()
             newKey.onChangeStarted()
+            (context as? MainActivity)?.invalidateOptionsMenu()
             setAnimating(context, true)
             if (previousView == null) {
                 container.addView(newView)
