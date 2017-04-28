@@ -68,7 +68,9 @@ internal class MainActivity : AppCompatActivity() {
         val menuRes = Navigator.getBackstack(this)
                 .top<ViewKey>()
                 .onCreateOptionsMenu()
-        menuInflater.inflate(menuRes, menu)
+        if (menuRes != -1) {
+            menuInflater.inflate(menuRes, menu)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 

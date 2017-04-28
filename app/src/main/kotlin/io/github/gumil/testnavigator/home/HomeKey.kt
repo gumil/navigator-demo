@@ -55,7 +55,7 @@ internal data class HomeKey(
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        (layout as? HomeLayout)?.let(HomeLayout::onClickFab)
+        (layout as? HomeLayout)?.onClickFab()
         return true
     }
 }

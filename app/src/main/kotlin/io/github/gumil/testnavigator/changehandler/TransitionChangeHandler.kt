@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
 
-abstract class TransitionChangeHandler: ViewChangeHandler {
+abstract class TransitionChangeHandler : ViewChangeHandler {
 
     override fun performViewChange(container: ViewGroup,
                                    previousView: View,
@@ -20,26 +20,26 @@ abstract class TransitionChangeHandler: ViewChangeHandler {
                 completionCallback.onCompleted()
             }
 
-            override fun onTransitionResume(transition: Transition?) { }
+            override fun onTransitionResume(transition: Transition?) {}
 
-            override fun onTransitionPause(transition: Transition?) { }
+            override fun onTransitionPause(transition: Transition?) {}
 
             override fun onTransitionCancel(transition: Transition?) {
                 completionCallback.onCompleted()
             }
 
-            override fun onTransitionStart(transition: Transition?) { }
+            override fun onTransitionStart(transition: Transition?) {}
         })
 
         prepareForTransition(container, previousView, newView, transition, direction) {
             TransitionManager.beginDelayedTransition(container, transition)
-            executePropertyChanges(container, previousView, newView, direction)
+            executePropertyChanges(container, previousView, newView, transition, direction)
         }
     }
 
     protected open fun prepareForTransition(container: ViewGroup, previousView: View, newView: View,
-                             transition: Transition, direction: Int,
-                             onTransitionPreparedListener: () -> Unit) {
+                                            transition: Transition, direction: Int,
+                                            onTransitionPreparedListener: () -> Unit) {
         onTransitionPreparedListener()
     }
 
@@ -47,9 +47,10 @@ abstract class TransitionChangeHandler: ViewChangeHandler {
     abstract fun getTransition(container: ViewGroup, previousView: View, newView: View, direction: Int): Transition
 
     protected open fun executePropertyChanges(container: ViewGroup,
-                                       previousView: View,
-                                       newView: View,
-                                       direction: Int) {
+                                              previousView: View,
+                                              newView: View,
+                                              transition: Transition,
+                                              direction: Int) {
         if (previousView.parent == container) {
             container.removeView(previousView)
         }

@@ -42,7 +42,9 @@ internal abstract class ViewKey : Parcelable {
     override fun describeContents() = hashCode()
 
     @MenuRes
-    open fun onCreateOptionsMenu(): Int = 0
+    open fun onCreateOptionsMenu(): Int = -1
 
     open fun onOptionsItemSelected(item: MenuItem) = false
+
+    open fun isDialog() = false
 }

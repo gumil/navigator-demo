@@ -10,12 +10,17 @@ import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.URLSpan
 import android.view.View
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.MainActivity
 import io.github.gumil.testnavigator.changehandler.SingleFadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 import io.github.gumil.testnavigator.common.ViewLayout
 
-internal class DialogKey() : ViewKey() {
+internal data class DialogKey(
+        private val tag: String = DialogKey::class.java.simpleName
+) : ViewKey() {
+
+    var changeHandler: ViewChangeHandler = SingleFadeChangeHandler()
 
     override fun layout(): ViewLayout {
         val details = SpannableString("A backstack library for simpler navigation between views, fragments, or whatevers.")
@@ -37,7 +42,7 @@ internal class DialogKey() : ViewKey() {
         return DialogLayout("Navigator", description)
     }
 
-    override fun viewChangeHandler() = SingleFadeChangeHandler()
+    override fun viewChangeHandler() = changeHandler
 
     constructor(parcel: Parcel) : this()
 
@@ -52,4 +57,5 @@ internal class DialogKey() : ViewKey() {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {}
 
+    override fun isDialog() = true
 }

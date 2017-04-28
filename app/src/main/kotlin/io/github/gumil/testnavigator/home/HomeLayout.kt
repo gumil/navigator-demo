@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.widget.ImageView
 import com.zhuinden.simplestack.navigator.Navigator
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.changehandler.fab.FabToDialogTransitionChangeHandler
 import io.github.gumil.testnavigator.child.ParentKey
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.dialog.DialogKey
@@ -24,6 +25,10 @@ import org.jetbrains.anko.design.floatingActionButton
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
 internal class HomeLayout : ViewLayout() {
+
+    companion object {
+        const val FAB_ID = 123456789
+    }
 
     private val homeAdapter by lazy {
         HomeAdapter().apply {
@@ -44,11 +49,16 @@ internal class HomeLayout : ViewLayout() {
             }.lparams(matchParent, matchParent)
 
             floatingActionButton {
+                id = FAB_ID
                 elevation = resources.getDimensionPixelSize(R.dimen.z_fab).toFloat()
                 scaleType = ImageView.ScaleType.MATRIX
                 stateListAnimator = AnimatorInflater.loadStateListAnimator(getContext(), R.animator.raise)
                 transitionName = getString(R.string.fab_dialog_transition_name)
                 imageResource = R.drawable.ic_github_face
+
+                onClick {
+                    onClickFab(true)
+                }
             }.lparams(wrapContent, wrapContent) {
                 gravity = Gravity.BOTTOM or Gravity.END
                 bottomMargin = resources.getDimensionPixelSize(R.dimen.padding_normal)
@@ -83,7 +93,14 @@ internal class HomeLayout : ViewLayout() {
 
     fun getLayoutManagerState() = recyclerLayoutManager.onSaveInstanceState()
 
-    fun onClickFab() {
-        Navigator.getBackstack(view.context).goTo(DialogKey())
+    fun onClickFab(isFromFab: Boolean = false) {
+        val key = if (isFromFab) {
+            DialogKey().apply {
+                changeHandler = FabToDialogTransitionChangeHandler()
+            }
+        } else {
+            DialogKey()
+        }
+        Navigator.getBackstack(view.context).goTo(key)
     }
 }

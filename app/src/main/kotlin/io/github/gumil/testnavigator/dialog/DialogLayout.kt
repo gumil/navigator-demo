@@ -17,9 +17,14 @@ internal class DialogLayout(
         private val description: CharSequence
 ) : ViewLayout() {
 
+    companion object {
+        const val DIALOG_BACKGROUND_ID = 9899
+    }
+
     override fun createView(context: Context) = with(context) {
         frameLayout {
             view {
+                id = DIALOG_BACKGROUND_ID
                 backgroundColor = getColorRes(R.color.immersive_background)
             }.lparams(matchParent, matchParent)
 

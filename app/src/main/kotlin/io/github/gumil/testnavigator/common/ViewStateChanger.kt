@@ -50,13 +50,15 @@ internal class ViewStateChanger(
                 return@Callback
             }
             val previousKey = stateChange.topPreviousState<ViewKey>()
-            val previousView = container.getChildAt(0)
+            val previousView = if (stateChange.direction == StateChange.BACKWARD)
+                container.getChildAt(container.childCount - 1) else container.getChildAt(0)
             if (previousView != null && previousKey != null) {
                 Navigator.persistViewToState(previousView)
             }
             val newKey = stateChange.topNewState<ViewKey>()
             val newContext = stateChange.createContext(context, newKey)
-            val newView = newKey.layout.inflate(newContext)
+            val newView = if (previousKey?.isDialog() ?: false)
+                container.getChildAt(0) else newKey.layout.inflate(newContext)
             Navigator.restoreViewFromState(newView)
 
             previousKey?.onViewRemoved()
@@ -66,6 +68,7 @@ internal class ViewStateChanger(
                 container.addView(newView)
                 finishStateChange(stateChange, container, previousView, newView, completionCallback)
                 newKey.onChangeEnded()
+                (context as? MainActivity)?.invalidateOptionsMenu()
                 setAnimating(context, false)
             } else {
                 val viewChangeHandler: ViewChangeHandler
@@ -83,6 +86,7 @@ internal class ViewStateChanger(
                 ) {
                     finishStateChange(stateChange, container, previousView, newView, completionCallback)
                     newKey.onChangeEnded()
+                    (context as? MainActivity)?.invalidateOptionsMenu()
                     setAnimating(context, false)
                 }
             }

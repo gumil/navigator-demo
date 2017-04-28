@@ -19,7 +19,7 @@ class SharedElementDelayingChangeHandler(
         newView.parent?.let {
             if (waitForTransitionNames.isNotEmpty()) {
                 onPreDrawListener = ViewTreeObserver.OnPreDrawListener {
-                    var addedSubviewListeners: Boolean = false
+                    val addedSubviewListeners: Boolean = false
                     val foundViews = mutableListOf<View>()
                     for (transitionName in waitForTransitionNames) {
                         getViewWithTransitionName(previousView, transitionName)?.let {
@@ -73,7 +73,8 @@ class SharedElementDelayingChangeHandler(
         return null
     }
 
-    override fun executePropertyChanges(container: ViewGroup, previousView: View, newView: View, direction: Int) {
+    override fun executePropertyChanges(container: ViewGroup, previousView: View, newView: View,
+                                        transition: Transition, direction: Int) {
         newView.visibility = View.VISIBLE
 
         for (removedView in removedViews) {
@@ -81,6 +82,6 @@ class SharedElementDelayingChangeHandler(
         }
 
         removedViews.clear()
-        super.executePropertyChanges(container, previousView, newView, direction)
+        super.executePropertyChanges(container, previousView, newView, transition, direction)
     }
 }
