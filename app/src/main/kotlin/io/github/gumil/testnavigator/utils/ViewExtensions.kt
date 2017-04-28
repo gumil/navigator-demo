@@ -28,6 +28,12 @@ internal fun Button.applyButtonBarStyle(): Button {
     return this
 }
 
+internal fun Button.applyButtonBarStyle(init: Button.() -> Unit): Button {
+    applyButtonBarStyle()
+    init(this)
+    return this
+}
+
 internal fun Context.getMaterialColor(index: Int): Int {
     val colors = resources.obtainTypedArray(R.array.mdcolor_300)
 

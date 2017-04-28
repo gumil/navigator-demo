@@ -11,6 +11,7 @@ import com.zhuinden.simplestack.navigator.Navigator
 import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.child.ParentKey
 import io.github.gumil.testnavigator.common.ViewLayout
+import io.github.gumil.testnavigator.dialog.DialogKey
 import io.github.gumil.testnavigator.dragdismiss.DragDismissKey
 import io.github.gumil.testnavigator.master.MasterKey
 import io.github.gumil.testnavigator.navigation.NavigationKey
@@ -81,4 +82,8 @@ internal class HomeLayout : ViewLayout() {
     }
 
     fun getLayoutManagerState() = recyclerLayoutManager.onSaveInstanceState()
+
+    fun onClickFab() {
+        Navigator.getBackstack(view.context).goTo(DialogKey())
+    }
 }

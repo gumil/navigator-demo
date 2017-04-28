@@ -2,6 +2,9 @@ package io.github.gumil.testnavigator.common
 
 import android.content.Intent
 import android.os.Parcelable
+import android.support.annotation.MenuRes
+import android.view.Menu
+import android.view.MenuItem
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
 
 internal abstract class ViewKey : Parcelable {
@@ -37,4 +40,9 @@ internal abstract class ViewKey : Parcelable {
     open fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {}
 
     override fun describeContents() = hashCode()
+
+    @MenuRes
+    open fun onCreateOptionsMenu(): Int = 0
+
+    open fun onOptionsItemSelected(item: MenuItem) = false
 }

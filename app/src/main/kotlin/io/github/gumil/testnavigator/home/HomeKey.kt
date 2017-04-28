@@ -3,7 +3,9 @@ package io.github.gumil.testnavigator.home
 import android.os.Parcel
 import android.os.Parcelable
 import android.support.v7.widget.RecyclerView
+import android.view.MenuItem
 import com.zhuinden.simplestack.navigator.changehandlers.NoOpViewChangeHandler
+import io.github.gumil.testnavigator.R
 import io.github.gumil.testnavigator.common.ViewKey
 
 internal data class HomeKey(
@@ -46,5 +48,14 @@ internal data class HomeKey(
         (layout as? HomeLayout)?.let { home ->
             state?.let { home.restoreLayoutManager(it) }
         }
+    }
+
+    override fun onCreateOptionsMenu(): Int {
+        return R.menu.home
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        (layout as? HomeLayout)?.let(HomeLayout::onClickFab)
+        return true
     }
 }
