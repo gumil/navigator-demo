@@ -26,8 +26,7 @@ Using Navigator library to rewrite the Conductor Demo App.
 
 - Simple Stack is nice and simple and I prefer it over Flow or Conductor. Flow is complex and Conductor, I'm just not sure on what happens internally on its lifecycle and I wanted to avoid that like how I'm avoiding fragments now.
 
-## Notes
-The building blocks for the UI is just extending
+## Building Blocks
  * [ViewKey](https://github.com/gumil/navigator-demo/blob/master/app/src/main/kotlin/io/github/gumil/testnavigator/common/ViewKey.kt)
    * This interface has lifecycle callbacks and it's the key to use to add to the backstack.
  * [ViewLayout](https://github.com/gumil/navigator-demo/blob/master/app/src/main/kotlin/io/github/gumil/testnavigator/common/ViewLayout.kt)
