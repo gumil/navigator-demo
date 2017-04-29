@@ -19,9 +19,7 @@ internal class CityDetailKey(
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readString(),
-            mutableListOf<String>().apply {
-                parcel.readStringList(this)
-            }
+            mutableListOf<String>()
     )
 
     companion object {
@@ -36,7 +34,6 @@ internal class CityDetailKey(
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeInt(imageDrawableRes)
         dest.writeString(title)
-        dest.writeList(names)
     }
 
 }
