@@ -54,5 +54,5 @@ internal abstract class ViewKey : Parcelable {
      * @return flag to know if the Previous View should be removed from the container
      * Sometimes we need to make the previous view visible like we do with dialogs
      */
-    open fun isPreviousViewPersisted() = false
+    open fun shouldPreviousViewBePersisted() = false
 }

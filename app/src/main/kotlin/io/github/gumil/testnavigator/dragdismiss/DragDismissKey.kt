@@ -22,4 +22,5 @@ internal class DragDismissKey : ViewKey() {
 
     override fun writeToParcel(dest: Parcel, flags: Int) {}
 
+    override fun shouldPreviousViewBePersisted() = true
 }

@@ -55,5 +55,5 @@ internal data class DialogKey(
 
     override fun writeToParcel(dest: Parcel, flags: Int) {}
 
-    override fun isPreviousViewPersisted() = true
+    override fun shouldPreviousViewBePersisted() = true
 }

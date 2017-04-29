@@ -21,11 +21,7 @@ abstract class SingleViewChangeHandler: ViewChangeHandler {
                 container.addView(newView)
             }
         } else {
-            container.getChildAt(container.childCount - 1).also {
-                if(container.childCount == 1) {
-                    container.addView(newView, container.indexOfChild(previousView))
-                }
-            }
+            container.getChildAt(container.childCount - 1)
         }
 
         view.waitForMeasure { view, _, _ ->

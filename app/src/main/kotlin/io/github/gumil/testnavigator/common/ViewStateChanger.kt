@@ -57,10 +57,10 @@ internal class ViewStateChanger(
             }
             val newKey = stateChange.topNewState<ViewKey>()
             val newContext = stateChange.createContext(context, newKey)
-            val newView = if (previousKey?.isPreviousViewPersisted() ?: false)
+            val newView = if (previousKey?.shouldPreviousViewBePersisted() ?: false)
                 container.getChildAt(0) else newKey.layout.inflate(newContext)
 
-            if (newKey.isPreviousViewPersisted() && stateChange.previousState.isEmpty()) {
+            if (newKey.shouldPreviousViewBePersisted() && stateChange.previousState.isEmpty()) {
                 let { stateChange.newState }
                         .filterIsInstance<ViewKey>()
                         .addPreviousViewIfPossible(newContext)
