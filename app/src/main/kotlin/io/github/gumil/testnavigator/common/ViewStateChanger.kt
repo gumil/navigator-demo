@@ -57,8 +57,16 @@ internal class ViewStateChanger(
             }
             val newKey = stateChange.topNewState<ViewKey>()
             val newContext = stateChange.createContext(context, newKey)
-            val newView = if (previousKey?.shoudPersistPreviousView() ?: false)
+            val newView = if (previousKey?.isPreviousViewPersisted() ?: false)
                 container.getChildAt(0) else newKey.layout.inflate(newContext)
+
+            if (newKey.isPreviousViewPersisted() && stateChange.previousState.isEmpty()) {
+                let { stateChange.newState }
+                        .filterIsInstance<ViewKey>()
+                        .addPreviousViewIfPossible(newContext)
+            }
+
+
             Navigator.restoreViewFromState(newView)
 
             previousKey?.onViewRemoved()
@@ -92,6 +100,14 @@ internal class ViewStateChanger(
                 }
             }
         })
+    }
+
+    private fun List<ViewKey>.addPreviousViewIfPossible(newContext: Context) {
+        toList().takeIf { it.size >= 2 }
+                ?.getOrNull(size - 2)
+                ?.apply {
+                    container.addView(layout.inflate(newContext))
+                }
     }
 
     private fun setAnimating(context: Context, isAnimating: Boolean) {

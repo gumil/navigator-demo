@@ -83,7 +83,6 @@ class FabToDialogTransitionChangeHandler : TransitionChangeHandler() {
             transition.addListener(object : TransitionEndListener() {
                 override fun onTransitionCompleted(transition: Transition) {
                     fabParent?.removeView(dialogBackground)
-                    fabParent?.findViewById(HomeLayout.FAB_ID)?.visibility = View.VISIBLE
                     dialogBackground = null
                 }
             })

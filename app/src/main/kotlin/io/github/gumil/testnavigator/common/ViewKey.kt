@@ -41,10 +41,18 @@ internal abstract class ViewKey : Parcelable {
 
     override fun describeContents() = hashCode()
 
+    /**
+     * Lifecycle: Called when creating options menu
+     * @return Menu Resource
+     */
     @MenuRes
     open fun onCreateOptionsMenu(): Int = -1
 
     open fun onOptionsItemSelected(item: MenuItem) = false
 
-    open fun shoudPersistPreviousView() = false
+    /**
+     * @return flag to know if the Previous View should be removed from the container
+     * Sometimes we need to make the previous view visible like we do with dialogs
+     */
+    open fun isPreviousViewPersisted() = false
 }
