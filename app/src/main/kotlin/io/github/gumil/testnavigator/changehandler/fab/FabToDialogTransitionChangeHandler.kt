@@ -34,7 +34,7 @@ class FabToDialogTransitionChangeHandler : TransitionChangeHandler() {
     override fun prepareForTransition(container: ViewGroup, previousView: View, newView: View, transition: Transition, direction: Int, onTransitionPreparedListener: () -> Unit) {
         fab = if (direction == StateChange.FORWARD) previousView.findViewById(HomeLayout.FAB_ID)
         else newView.findViewById(HomeLayout.FAB_ID)
-        fabParent = fab?.parent as ViewGroup
+        fabParent = fab?.parent as ViewGroup?
 
         if (direction == StateChange.BACKWARD) {
             /*

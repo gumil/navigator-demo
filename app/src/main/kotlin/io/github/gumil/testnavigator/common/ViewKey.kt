@@ -46,5 +46,5 @@ internal abstract class ViewKey : Parcelable {
 
     open fun onOptionsItemSelected(item: MenuItem) = false
 
-    open fun isDialog() = false
+    open fun shoudPersistPreviousView() = false
 }

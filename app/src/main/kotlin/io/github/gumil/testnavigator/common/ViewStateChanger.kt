@@ -57,7 +57,7 @@ internal class ViewStateChanger(
             }
             val newKey = stateChange.topNewState<ViewKey>()
             val newContext = stateChange.createContext(context, newKey)
-            val newView = if (previousKey?.isDialog() ?: false)
+            val newView = if (previousKey?.shoudPersistPreviousView() ?: false)
                 container.getChildAt(0) else newKey.layout.inflate(newContext)
             Navigator.restoreViewFromState(newView)
 
@@ -95,8 +95,6 @@ internal class ViewStateChanger(
     }
 
     private fun setAnimating(context: Context, isAnimating: Boolean) {
-        (context as? MainActivity)?.let {
-            it.isAnimating = isAnimating
-        }
+        (context as? MainActivity)?.isAnimating = isAnimating
     }
 }
