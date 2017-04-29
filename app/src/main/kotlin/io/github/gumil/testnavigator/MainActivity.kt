@@ -78,6 +78,11 @@ internal class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        instance = null
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val onOptionsItemSelected = Navigator.getBackstack(this)
                 .top<ViewKey>()
