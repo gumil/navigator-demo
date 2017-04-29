@@ -17,13 +17,18 @@ abstract class SingleViewChangeHandler: ViewChangeHandler {
                                    completionCallback: ViewChangeHandler.CompletionCallback) {
 
         val view = if (direction == StateChange.FORWARD) {
-            container.addView(newView)
-            newView
+            newView.also {
+                container.addView(newView)
+            }
         } else {
-            container.getChildAt(container.childCount - 1)
+            container.getChildAt(container.childCount - 1).also {
+                if(container.childCount == 1) {
+                    container.addView(newView, container.indexOfChild(previousView))
+                }
+            }
         }
 
-        view.waitForMeasure { view, width, height ->
+        view.waitForMeasure { view, _, _ ->
             runAnimation(view, direction, object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     if (direction == -1) {
