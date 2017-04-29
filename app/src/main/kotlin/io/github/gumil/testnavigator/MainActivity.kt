@@ -48,10 +48,12 @@ internal class MainActivity : AppCompatActivity() {
         return if (!isAnimating) super.dispatchTouchEvent(ev) else isAnimating
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        Navigator.getBackstack(this)
-                .top<ViewKey>()
-                .onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        data?.let {
+            Navigator.getBackstack(this)
+                    .top<ViewKey>()
+                    .onActivityResult(requestCode, resultCode, data)
+        }
     }
 
     fun setChildStateChanger(stateChanger: StateChanger) {
