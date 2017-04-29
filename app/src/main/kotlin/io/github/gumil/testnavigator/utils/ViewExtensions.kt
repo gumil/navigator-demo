@@ -81,6 +81,7 @@ internal fun View.waitForMeasure(callback: (View, Int, Int) -> Unit) {
     })
 }
 
+@Suppress("deprecation")
 internal fun TextView.textAppearance(@StyleRes style: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         setTextAppearance(style)

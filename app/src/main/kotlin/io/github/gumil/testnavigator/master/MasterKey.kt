@@ -5,17 +5,15 @@ import android.os.Parcelable
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
-internal class MasterKey() : ViewKey() {
+internal class MasterKey : ViewKey() {
     override fun layout() = MasterLayout()
 
     override fun viewChangeHandler() = FadeChangeHandler()
 
-    constructor(parcel: Parcel) : this()
-
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<MasterKey> = object : Parcelable.Creator<MasterKey> {
-            override fun createFromParcel(`in`: Parcel) =  MasterKey(`in`)
+            override fun createFromParcel(`in`: Parcel) =  MasterKey()
 
             override fun newArray(size: Int) = arrayOfNulls<MasterKey>(size)
         }

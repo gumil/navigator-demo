@@ -24,12 +24,10 @@ internal data class ParentKey(
 
     override fun viewChangeHandler() = FadeChangeHandler()
 
-    constructor(parcel: Parcel) : this()
-
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<ParentKey> = object : Parcelable.Creator<ParentKey> {
-            override fun createFromParcel(`in`: Parcel) = ParentKey(`in`)
+            override fun createFromParcel(`in`: Parcel) = ParentKey()
 
             override fun newArray(size: Int) = arrayOfNulls<ParentKey>(size)
         }

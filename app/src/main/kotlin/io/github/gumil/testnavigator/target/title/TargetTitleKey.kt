@@ -13,12 +13,10 @@ internal class TargetTitleKey(
 
     override fun viewChangeHandler() = SegueViewChangeHandler()
 
-    constructor(parcel: Parcel) : this()
-
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<TargetTitleKey> = object : Parcelable.Creator<TargetTitleKey> {
-            override fun createFromParcel(`in`: Parcel) = TargetTitleKey(`in`)
+            override fun createFromParcel(`in`: Parcel) = TargetTitleKey()
 
             override fun newArray(size: Int) = arrayOfNulls<TargetTitleKey>(size)
         }

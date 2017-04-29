@@ -21,7 +21,7 @@ abstract class AnimatorChangeHandler : ViewChangeHandler {
             container.addView(newView, container.indexOfChild(previousView))
         }
 
-        newView.waitForMeasure { view, width, height ->
+        newView.waitForMeasure { view, _, _ ->
             runAnimation(previousView, view, direction, object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     container.removeView(previousView)

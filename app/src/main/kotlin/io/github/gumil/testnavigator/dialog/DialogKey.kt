@@ -44,12 +44,10 @@ internal data class DialogKey(
 
     override fun viewChangeHandler() = changeHandler
 
-    constructor(parcel: Parcel) : this()
-
     companion object {
         @JvmField
         val CREATOR: Parcelable.Creator<DialogKey> = object : Parcelable.Creator<DialogKey> {
-            override fun createFromParcel(`in`: Parcel) = DialogKey(`in`)
+            override fun createFromParcel(`in`: Parcel) = DialogKey()
 
             override fun newArray(size: Int) = arrayOfNulls<DialogKey>(size)
         }
