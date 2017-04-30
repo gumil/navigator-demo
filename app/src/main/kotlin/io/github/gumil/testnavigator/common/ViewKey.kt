@@ -55,4 +55,10 @@ internal abstract class ViewKey : Parcelable {
      * Sometimes we need to make the previous view visible like we do with dialogs
      */
     open fun shouldPreviousViewBePersisted() = false
+
+    /**
+     * Lifecycle: Called when view was destroyed and readded immediately
+     * Only called when shouldPreviousViewBePersisted() is set to true
+     */
+    open fun restoreState() {}
 }

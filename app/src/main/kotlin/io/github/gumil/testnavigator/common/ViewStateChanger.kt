@@ -66,7 +66,6 @@ internal class ViewStateChanger(
                         .addPreviousViewIfPossible(newContext)
             }
 
-
             Navigator.restoreViewFromState(newView)
 
             previousKey?.onViewRemoved()
@@ -107,6 +106,7 @@ internal class ViewStateChanger(
                 ?.getOrNull(size - 2)
                 ?.apply {
                     container.addView(layout.inflate(newContext))
+                    restoreState()
                 }
     }
 

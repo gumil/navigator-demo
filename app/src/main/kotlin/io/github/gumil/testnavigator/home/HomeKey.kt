@@ -19,7 +19,7 @@ internal data class HomeKey(
     override fun viewChangeHandler() = NoOpViewChangeHandler()
 
     constructor(parcel: Parcel) : this() {
-        parcel.readParcelable<RecyclerView.SavedState>(RecyclerView.SavedState::class.java.classLoader)
+        state = parcel.readParcelable<RecyclerView.SavedState>(RecyclerView.SavedState::class.java.classLoader)
     }
 
     companion object {
@@ -45,9 +45,7 @@ internal data class HomeKey(
 
     override fun onChangeStarted() {
         super.onChangeStarted()
-        (layout as? HomeLayout)?.let { home ->
-            state?.let { home.restoreLayoutManager(it) }
-        }
+        restoreState()
     }
 
     override fun onCreateOptionsMenu(): Int {
@@ -57,5 +55,12 @@ internal data class HomeKey(
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         (layout as? HomeLayout)?.onClickFab()
         return true
+    }
+
+    override fun restoreState() {
+        super.restoreState()
+        (layout as? HomeLayout)?.let { home ->
+            state?.let { home.restoreLayoutManager(it) }
+        }
     }
 }
