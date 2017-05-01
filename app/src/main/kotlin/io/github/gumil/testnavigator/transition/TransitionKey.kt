@@ -3,6 +3,10 @@ package io.github.gumil.testnavigator.transition
 import android.os.Parcel
 import android.os.Parcelable
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
+import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
+import io.github.gumil.testnavigator.changehandler.ArcFadeMoveChangeHandler
+import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
+import io.github.gumil.testnavigator.changehandler.FlipChangeHandler
 import io.github.gumil.testnavigator.changehandler.VerticalChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
@@ -10,18 +14,21 @@ internal data class TransitionKey(
         private val transitionDemo: TransitionDemo = TransitionDemo.VERTICAL
 ) : ViewKey() {
 
-    private var changeHandler: ViewChangeHandler = VerticalChangeHandler()
-
-    constructor(transitionDemo: TransitionDemo,
-                changeHandler: ViewChangeHandler) : this(transitionDemo) {
-        this.changeHandler = changeHandler
-    }
+    var changeHandler: ViewChangeHandler = FadeChangeHandler()
 
     override fun layout() = TransitionLayout(transitionDemo.colorId,
             transitionDemo.title, transitionDemo.ordinal)
 
     override fun viewChangeHandler(): ViewChangeHandler {
-        return changeHandler
+        return when (transitionDemo) {
+            TransitionDemo.VERTICAL -> VerticalChangeHandler()
+            TransitionDemo.CIRCULAR -> changeHandler
+            TransitionDemo.FADE -> FadeChangeHandler()
+            TransitionDemo.FLIP -> FlipChangeHandler()
+            TransitionDemo.HORIZONTAL -> SegueViewChangeHandler()
+            TransitionDemo.ARC_FADE -> ArcFadeMoveChangeHandler()
+            TransitionDemo.ARC_FADE_RESET -> ArcFadeMoveChangeHandler()
+        }
     }
 
     constructor(parcel: Parcel) : this(
@@ -40,5 +47,14 @@ internal data class TransitionKey(
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeInt(transitionDemo.ordinal)
+    }
+
+    override fun onBackPressed(): Boolean {
+        if (transitionDemo == TransitionDemo.CIRCULAR) {
+            (layout as? TransitionLayout)?.getCircularChangeHandler()?.let {
+                changeHandler = it
+            }
+        }
+        return super.onBackPressed()
     }
 }

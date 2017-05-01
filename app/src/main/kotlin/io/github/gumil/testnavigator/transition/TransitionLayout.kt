@@ -9,12 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.zhuinden.simplestack.navigator.Navigator
-import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
+import com.zhuinden.simplestack.navigator.ViewChangeHandler
 import io.github.gumil.testnavigator.R
-import io.github.gumil.testnavigator.changehandler.ArcFadeMoveChangeHandler
 import io.github.gumil.testnavigator.changehandler.CircularRevealChangeHandler
-import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
-import io.github.gumil.testnavigator.changehandler.FlipChangeHandler
 import io.github.gumil.testnavigator.common.ViewLayout
 import io.github.gumil.testnavigator.home.HomeDemoModel
 import io.github.gumil.testnavigator.home.HomeKey
@@ -28,8 +25,8 @@ internal class TransitionLayout(
         private val index: Int
 ) : ViewLayout() {
 
-    lateinit var container: ViewGroup
-    lateinit var viewNext: View
+    private lateinit var container: ViewGroup
+    private lateinit var viewNext: View
 
     companion object {
         private const val containerId = 1
@@ -38,7 +35,6 @@ internal class TransitionLayout(
     override fun createView(context: Context) = with(context) {
         toolbarTitle = HomeDemoModel.TRANSITIONS.title
         container = if (index == 5) getSharedView() else getNormalView()
-
         container
     }
 
@@ -121,30 +117,19 @@ internal class TransitionLayout(
     }
 
     private fun goTo(context: Context, index: Int) {
-
         if (index >= TransitionDemo.values().size) {
             Navigator.getBackstack(context).goTo(HomeKey())
             return
         }
 
-        val demo = TransitionDemo.fromIndex(index)
-        val transitionKey =
-                when (demo) {
-                    TransitionDemo.VERTICAL -> TransitionKey()
-                    TransitionDemo.CIRCULAR -> TransitionKey(demo,
-                            CircularRevealChangeHandler(viewNext, container))
-                    TransitionDemo.FADE -> TransitionKey(demo,
-                            FadeChangeHandler())
-                    TransitionDemo.FLIP -> TransitionKey(demo,
-                            FlipChangeHandler())
-                    TransitionDemo.HORIZONTAL -> TransitionKey(demo,
-                            SegueViewChangeHandler())
-                    TransitionDemo.ARC_FADE -> TransitionKey(demo,
-                            ArcFadeMoveChangeHandler())
-                    TransitionDemo.ARC_FADE_RESET -> TransitionKey(demo,
-                            ArcFadeMoveChangeHandler())
-                }
+        val transitionDemo = TransitionDemo.fromIndex(index)
+        val transitionKey = TransitionKey(transitionDemo)
+        if (transitionDemo == TransitionDemo.CIRCULAR) {
+            transitionKey.changeHandler = CircularRevealChangeHandler(viewNext, container)
+        }
 
         Navigator.getBackstack(context).goTo(transitionKey)
     }
+
+    fun getCircularChangeHandler(): ViewChangeHandler = CircularRevealChangeHandler(viewNext, container)
 }
