@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.widget.ImageView
 import com.zhuinden.simplestack.navigator.Navigator
 import io.github.gumil.testnavigator.R
+import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.changehandler.fab.FabToDialogTransitionChangeHandler
 import io.github.gumil.testnavigator.child.ParentKey
 import io.github.gumil.testnavigator.common.ViewLayout
@@ -72,7 +73,9 @@ internal class HomeLayout : ViewLayout() {
         return { homeDemoModel, position ->
             val backstack = Navigator.getBackstack(view.context)
             when (homeDemoModel) {
-                HomeDemoModel.NAVIGATION -> backstack.goTo(NavigationKey())
+                HomeDemoModel.NAVIGATION -> backstack.goTo(NavigationKey().apply {
+                    changeHandler = FadeChangeHandler()
+                })
                 HomeDemoModel.TRANSITIONS -> backstack.goTo(TransitionKey())
                 HomeDemoModel.SHARED_ELEMENT_TRANSITIONS -> backstack.goTo(CityGridKey(homeDemoModel, position))
                 HomeDemoModel.CHILD_CONTROLLERS -> backstack.goTo(ParentKey())

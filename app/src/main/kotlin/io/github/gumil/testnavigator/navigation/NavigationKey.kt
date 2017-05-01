@@ -3,6 +3,7 @@ package io.github.gumil.testnavigator.navigation
 import android.os.Parcel
 import android.os.Parcelable
 import com.zhuinden.simplestack.navigator.ViewChangeHandler
+import com.zhuinden.simplestack.navigator.changehandlers.SegueViewChangeHandler
 import io.github.gumil.testnavigator.changehandler.FadeChangeHandler
 import io.github.gumil.testnavigator.common.ViewKey
 
@@ -11,7 +12,7 @@ internal data class NavigationKey(
         private val displayUpMode: DisplayUpMode = DisplayUpMode.SHOW_FOR_CHILDREN_ONLY
 ) : ViewKey() {
 
-    var changeHandler: ViewChangeHandler = FadeChangeHandler()
+    var changeHandler: ViewChangeHandler = SegueViewChangeHandler()
 
     override fun layout() = NavigationLayout(index, displayUpMode)
 
